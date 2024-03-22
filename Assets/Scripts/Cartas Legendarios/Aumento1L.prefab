@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -926282604541157856}
   m_Layer: 0
   m_Name: Aumento1L
-  m_TagString: Untagged
+  m_TagString: AumentoR2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Nombre: Pajaros
   Tipo: Aumento
-  spriteGigante: {fileID: 0}
 --- !u!61 &-926282604541157856
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4828900827663379663}
   m_Layer: 0
   m_Name: MundoInversoClima
-  m_TagString: Untagged
+  m_TagString: ClimaL
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

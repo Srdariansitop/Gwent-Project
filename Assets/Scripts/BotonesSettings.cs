@@ -27,7 +27,7 @@ public void Activar()
 
 public void Regresar()
 {
-     panel = GameObject.FindGameObjectWithTag("Invocar");
+     panel = GameObject.FindGameObjectWithTag("Invocar2");
             if(panel != null)
             {
               panel.transform.localScale = Vector3.zero;

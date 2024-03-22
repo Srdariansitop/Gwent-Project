@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5418632974526501421}
   m_Layer: 0
   m_Name: Aumento2L
-  m_TagString: Untagged
+  m_TagString: AumentoRC2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,10 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a876a84c3285564483abc8f3f40563f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawImage: {fileID: 0}
   Nombre: Invocacion
   Tipo: Aumento
-  spriteGigante: {fileID: 0}
 --- !u!212 &2094413376489839277
 SpriteRenderer:
   m_ObjectHideFlags: 0

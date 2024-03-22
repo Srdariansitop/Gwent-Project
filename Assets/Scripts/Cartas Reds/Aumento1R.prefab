@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9150102155132943911}
   m_Layer: 0
   m_Name: Aumento1R
-  m_TagString: Untagged
+  m_TagString: AumentoR
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
