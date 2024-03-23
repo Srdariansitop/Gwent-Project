@@ -4,34 +4,44 @@ using UnityEngine;
 
 public class BotonesSettings : MonoBehaviour
 {
+  //Camaras
   public GameObject cameranew;
 public GameObject mainCameraa;
 
+
+//Regresar
 private GameObject panel;
 
-private bool isMainCameraActive = true;
+
 
 void Start()
 {
-    cameranew.SetActive(false);
     mainCameraa.SetActive(true);
+    cameranew.SetActive(false);
 }
 
 public void Activar()
 {
-    isMainCameraActive = !isMainCameraActive; // Alternar el estado
-
-    cameranew.SetActive(!isMainCameraActive);
-    mainCameraa.SetActive(isMainCameraActive);
+  Debug.Log("mbappe");
+    if (mainCameraa.activeSelf)
+    {
+        mainCameraa.SetActive(false);
+        cameranew.SetActive(true);
+    }
+    else
+    {
+        mainCameraa.SetActive(true);
+        cameranew.SetActive(false);
+    }
 }
 
 public void Regresar()
 {
-     panel = GameObject.FindGameObjectWithTag("Invocar2");
-            if(panel != null)
-            {
-              panel.transform.localScale = Vector3.zero;
-            }     
+  panel = GameObject.FindGameObjectWithTag("Invocar2");
+  if(panel != null)
+  {
+   panel.transform.localScale = Vector3.zero;
+  }     
 }
 
 

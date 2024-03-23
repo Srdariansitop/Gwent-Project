@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 public class CardUnidad : MonoBehaviour 
 {
    public string Name;
@@ -14,6 +15,11 @@ private GameObject spriteGigante;
  private static GameObject objectoInvocado;
  private static bool [,] posicionescampo;
  private static bool [,] posicionescamporival;
+ private static int Contador;
+private static int ContadorRival;
+public Text ContadorFisicoP;
+public Text ContadorFisicoR;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +58,7 @@ panel.transform.localScale = new Vector3(1f,1f,0);
 }
 public void Invocar()
 {
+  
 #region Mi Campo
   Debug.Log(objectoInvocado.tag);
   #region AsedioRed
@@ -64,6 +71,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,0] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[2,1] == false)
          {
@@ -71,6 +79,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,1] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[2,2] == false)
          {
@@ -78,6 +87,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,2] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else
          {
@@ -94,6 +104,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,0] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[1,1] == false)
          {
@@ -101,6 +112,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,1] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[1,2] == false)
          {
@@ -108,6 +120,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,2] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else
          {
@@ -124,6 +137,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,0] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[0,1] == false)
          {
@@ -131,6 +145,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,1] = true; 
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[0,2] == false)
          {
@@ -138,6 +153,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,2] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else
          {
@@ -154,6 +170,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,0] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[2,1] == false)
          {
@@ -161,6 +178,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,1] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[2,2] == false)
          {
@@ -168,6 +186,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,2] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
 
 
@@ -177,6 +196,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,0] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[1,1] == false)
          {
@@ -184,6 +204,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,1] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[1,2] == false)
          {
@@ -191,6 +212,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,2] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
         else  if(posicionescampo[0,0] == false)
          {
@@ -198,6 +220,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,0] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[0,1] == false)
          {
@@ -205,6 +228,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,1] = true; 
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[0,2] == false)
          {
@@ -212,6 +236,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,2] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else
          {
@@ -229,6 +254,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,0] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[2,1] == false)
          {
@@ -236,6 +262,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,1] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[2,2] == false)
          {
@@ -243,6 +270,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,2] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
 
 
@@ -252,6 +280,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,0] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[1,1] == false)
          {
@@ -259,6 +288,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,1] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[1,2] == false)
          {
@@ -266,6 +296,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,2] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
         else  if(posicionescampo[0,0] == false)
          {
@@ -273,6 +304,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,0] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[0,1] == false)
          {
@@ -287,6 +319,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,2] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
           else
          {
@@ -304,6 +337,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,0] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[2,1] == false)
          {
@@ -311,6 +345,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,1] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[2,2] == false)
          {
@@ -318,6 +353,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,2] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
 
 
@@ -327,6 +363,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,0] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[1,1] == false)
          {
@@ -341,6 +378,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,2] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
         else  if(posicionescampo[0,0] == false)
          {
@@ -348,6 +386,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,0] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[0,1] == false)
          {
@@ -355,6 +394,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,1] = true; 
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescampo[0,2] == false)
          {
@@ -362,6 +402,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,2] = true;
+            Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else
          {
@@ -384,6 +425,7 @@ if(objectoInvocado.tag == "Asedio1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,0] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[2,1] == false)
          {
@@ -391,6 +433,7 @@ if(objectoInvocado.tag == "Asedio1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,1] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[2,2] == false)
          {
@@ -398,6 +441,7 @@ if(objectoInvocado.tag == "Asedio1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,2] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else
          {
@@ -414,6 +458,7 @@ else if(objectoInvocado.tag == "Distancia1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,0] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[1,1] == false)
          {
@@ -421,6 +466,7 @@ else if(objectoInvocado.tag == "Distancia1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,1] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[1,2] == false)
          {
@@ -428,6 +474,7 @@ else if(objectoInvocado.tag == "Distancia1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,2] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else
          {
@@ -445,6 +492,7 @@ else if(objectoInvocado.tag == "Distancia1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,0] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[0,1] == false)
          {
@@ -452,6 +500,7 @@ else if(objectoInvocado.tag == "Distancia1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,1] = true; 
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[0,2] == false)
          {
@@ -459,6 +508,7 @@ else if(objectoInvocado.tag == "Distancia1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,2] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else
          {
@@ -475,6 +525,7 @@ else if(objectoInvocado.tag == "Oro1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,0] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[2,1] == false)
          {
@@ -482,6 +533,7 @@ else if(objectoInvocado.tag == "Oro1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,1] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[2,2] == false)
          {
@@ -489,6 +541,7 @@ else if(objectoInvocado.tag == "Oro1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,2] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
        else  if(posicionescamporival[1,0] == false)
          {
@@ -496,6 +549,7 @@ else if(objectoInvocado.tag == "Oro1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,0] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[1,1] == false)
          {
@@ -503,6 +557,7 @@ else if(objectoInvocado.tag == "Oro1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,1] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[1,2] == false)
          {
@@ -510,6 +565,7 @@ else if(objectoInvocado.tag == "Oro1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,2] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[0,0] == false)
          {
@@ -517,6 +573,7 @@ else if(objectoInvocado.tag == "Oro1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,0] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[0,1] == false)
          {
@@ -524,6 +581,7 @@ else if(objectoInvocado.tag == "Oro1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,1] = true; 
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[0,2] == false)
          {
@@ -531,6 +589,7 @@ else if(objectoInvocado.tag == "Oro1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,2] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else
          {
@@ -548,6 +607,7 @@ else if(objectoInvocado.tag == "Silver1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,0] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[2,1] == false)
          {
@@ -555,6 +615,7 @@ else if(objectoInvocado.tag == "Silver1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,1] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[2,2] == false)
          {
@@ -562,6 +623,7 @@ else if(objectoInvocado.tag == "Silver1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,2] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
        else  if(posicionescamporival[1,0] == false)
          {
@@ -569,6 +631,7 @@ else if(objectoInvocado.tag == "Silver1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,0] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[1,1] == false)
          {
@@ -576,6 +639,7 @@ else if(objectoInvocado.tag == "Silver1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,1] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[1,2] == false)
          {
@@ -583,6 +647,7 @@ else if(objectoInvocado.tag == "Silver1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,2] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[0,0] == false)
          {
@@ -590,6 +655,7 @@ else if(objectoInvocado.tag == "Silver1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,0] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[0,1] == false)
          {
@@ -597,6 +663,7 @@ else if(objectoInvocado.tag == "Silver1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,1] = true; 
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[0,2] == false)
          {
@@ -604,6 +671,7 @@ else if(objectoInvocado.tag == "Silver1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,2] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else
          {
@@ -620,6 +688,7 @@ else if(objectoInvocado.tag == "Senuelo1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,0] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[2,1] == false)
          {
@@ -627,6 +696,7 @@ else if(objectoInvocado.tag == "Senuelo1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,1] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[2,2] == false)
          {
@@ -634,6 +704,7 @@ else if(objectoInvocado.tag == "Senuelo1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,2] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
        else  if(posicionescamporival[1,0] == false)
          {
@@ -641,6 +712,7 @@ else if(objectoInvocado.tag == "Senuelo1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,0] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[1,1] == false)
          {
@@ -648,6 +720,7 @@ else if(objectoInvocado.tag == "Senuelo1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,1] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[1,2] == false)
          {
@@ -655,6 +728,7 @@ else if(objectoInvocado.tag == "Senuelo1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,2] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[0,0] == false)
          {
@@ -662,6 +736,7 @@ else if(objectoInvocado.tag == "Senuelo1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,0] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[0,1] == false)
          {
@@ -669,6 +744,7 @@ else if(objectoInvocado.tag == "Senuelo1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,1] = true; 
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else if(posicionescamporival[0,2] == false)
          {
@@ -676,6 +752,7 @@ else if(objectoInvocado.tag == "Senuelo1")
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,2] = true;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
          }
          else
          {
@@ -687,7 +764,19 @@ else if(objectoInvocado.tag == "Senuelo1")
   
 }
 
+   void Update()
+   {
      
+      if(ContadorFisicoP != null)
+      {
+         ContadorFisicoP.text = Contador.ToString();
+      }
+      if(ContadorFisicoR != null)
+      {
+         ContadorFisicoR.text = ContadorRival.ToString();
+      }
+     
+   }  
 
 
 

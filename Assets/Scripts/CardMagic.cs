@@ -32,6 +32,7 @@ public class CardMagic : MonoBehaviour
             {
               panel.transform.localScale = Vector3.zero;
             }     
+         
     
     }
     //Mostrar la carta en grande en la pantalla
@@ -59,7 +60,7 @@ objectoInvocado = gameObject;
 }
 public void Invocar()
 {
-  
+
   //Mi Lider
  if(objectoInvocado.tag == "Lider" && leader == false)
  {
