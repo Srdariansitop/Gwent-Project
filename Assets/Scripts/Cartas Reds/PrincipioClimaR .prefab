@@ -144,7 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Principio
-  Attack: 0
+  Attack: 300
   Tipo: Clima
+  doubleStat: 500
   ContadorFisicoP: {fileID: 0}
   ContadorFisicoR: {fileID: 0}

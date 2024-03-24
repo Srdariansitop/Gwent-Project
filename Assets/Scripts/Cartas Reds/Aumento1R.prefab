@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Poder de Uno
-  Attack: 0
+  Attack: 800
   Tipo: Aumento
   ContadorFisicoP: {fileID: 0}
   ContadorFisicoR: {fileID: 0}
