@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -15,6 +16,10 @@ private GameObject spriteGigante;
  private static GameObject objectoInvocado;
  private static bool [,] posicionescampo;
  private static bool [,] posicionescamporival;
+  private bool[,] posicionescartasmagicas;
+ private bool [,] posicionescartasmagicasrival;
+ private static bool LeaderPos;
+ private static bool LeaderRivalPos;
  private static int Contador;
 private static int ContadorRival;
 public Text ContadorFisicoP;
@@ -25,6 +30,8 @@ public Text ContadorFisicoR;
     {
       posicionescampo = new bool[3,3];
       posicionescamporival = new bool[3,3];
+      posicionescartasmagicas = new bool[3,2];
+       posicionescartasmagicasrival = new bool[3,2];
         spriteGigante = GameObject.FindGameObjectWithTag(nametag);
         spriteRenderer = spriteGigante.GetComponent<SpriteRenderer>();
          spriteGigante.transform.localScale = Vector3.zero;
@@ -411,6 +418,69 @@ public void Invocar()
 
   }
   #endregion
+ #region Lider
+else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
+{
+   GameObject posx = GameObject.Find("CartaLider1");
+    Vector3 posy = posx.transform.position;
+    objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+    LeaderPos = true;
+}
+ #endregion
+ #region Aumento
+  else if(objectoInvocado.tag == "AumentoR")
+ {
+     GameObject posx = GameObject.Find("AumentoDistancia1");
+    Vector3 posy = posx.transform.position;
+    objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+    posicionescartasmagicas[0,0] = true;
+   
+ }
+ else if(objectoInvocado.tag == "AumentoRA")
+ {
+  GameObject posx = GameObject.Find("AumentoAsedio1");
+    Vector3 posy = posx.transform.position;
+    objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+    posicionescartasmagicas[1,0] = true;
+ }
+ else if(objectoInvocado.tag == "AumentoRC")
+ {
+  GameObject posx = GameObject.Find("AumentoCuerpo1");
+    Vector3 posy = posx.transform.position;
+    objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+    posicionescartasmagicas[2,0] = true;
+ }
+ #endregion
+ #region Clima
+   else if(objectoInvocado.tag == "ClimaR")
+ {
+   if(posicionescartasmagicas[0,1] == false)
+   {
+     GameObject posx = GameObject.Find("Clima1");
+    Vector3 posy = posx.transform.position;
+    objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+    posicionescartasmagicas[0,1] = true;
+   }
+   else if(posicionescartasmagicas[1,1] == false)
+   {
+       GameObject posx = GameObject.Find("Clima2");
+    Vector3 posy = posx.transform.position;
+    objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+    posicionescartasmagicas[1,1] = true;
+   }
+   else if(posicionescartasmagicas[2,1] == false)
+   {
+      GameObject posx = GameObject.Find("Clima3");
+    Vector3 posy = posx.transform.position;
+    objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+    posicionescartasmagicas[2,1] = true;
+   }
+   else
+   {
+    Debug.Log("Todos los espacios de cartas estan ocupadas");
+   }
+ }
+ #endregion
   #endregion
 
 //Rival
@@ -759,6 +829,68 @@ else if(objectoInvocado.tag == "Senuelo1")
             Debug.Log("No hay posiciones disponibles");
          }
 }
+#endregion
+#region Lider Rival
+else if(objectoInvocado.tag == "Lider2" && LeaderRivalPos == false)
+{
+   GameObject posx = GameObject.Find("CartaLider2");
+    Vector3 posy = posx.transform.position;
+    objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+    LeaderRivalPos = true;
+}
+#endregion
+#region Aumento Rival
+else if(objectoInvocado.tag == "AumentoR2")
+ {
+    GameObject posx = GameObject.Find("AumentoDistancia2");
+    Vector3 posy = posx.transform.position;
+    objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+    posicionescartasmagicasrival[0,0] = true;
+ }
+ else if(objectoInvocado.tag == "AumentoRC2")
+ {
+  GameObject posx = GameObject.Find("AumentoCuerpo2");
+    Vector3 posy = posx.transform.position;
+    objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+    posicionescartasmagicasrival[1,0] = true;
+ }
+ else if(objectoInvocado.tag == "AumentoRA2")
+ {
+   GameObject posx = GameObject.Find("AumentoAsedio2");
+    Vector3 posy = posx.transform.position;
+    objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+    posicionescartasmagicasrival[2,0] = true;
+ }
+#endregion
+#region Clima Rival
+else if(objectoInvocado.tag == "ClimaL")
+ {
+   if(posicionescartasmagicasrival[0,1] == false)
+   {
+     GameObject posx = GameObject.Find("Clima4");
+    Vector3 posy = posx.transform.position;
+    objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+    posicionescartasmagicasrival[0,1] = true;
+   }
+   else if(posicionescartasmagicasrival[1,1] == false)
+   {
+       GameObject posx = GameObject.Find("Clima5");
+    Vector3 posy = posx.transform.position;
+    objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+    posicionescartasmagicasrival[1,1] = true;
+   }
+   else if(posicionescartasmagicasrival[2,1] == false)
+   {
+      GameObject posx = GameObject.Find("Clima6");
+    Vector3 posy = posx.transform.position;
+    objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+    posicionescartasmagicasrival[2,1] = true;
+   }
+   else
+   {
+    Debug.Log("Todos los espacios de cartas estan ocupadas");
+   }
+ }
 #endregion
 #endregion
   

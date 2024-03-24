@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1512533961525714099}
   - component: {fileID: 5854810495472107855}
-  - component: {fileID: 6418004998208953311}
   - component: {fileID: 4136288491834123137}
+  - component: {fileID: -3838916614842188495}
   m_Layer: 0
   m_Name: ColosalClima
   m_TagString: ClimaL
@@ -86,20 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6418004998208953311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6316633165407067203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a876a84c3285564483abc8f3f40563f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Nombre: Colosal
-  Tipo: Clima
 --- !u!61 &4136288491834123137
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -145,3 +131,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 15.001465, y: 21}
   m_EdgeRadius: 0
+--- !u!114 &-3838916614842188495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6316633165407067203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b135489033221164988930f3766d73eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Colosal
+  Attack: 0
+  Tipo: Clima
+  ContadorFisicoP: {fileID: 0}
+  ContadorFisicoR: {fileID: 0}

@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4890183804332702857}
   - component: {fileID: 2893339317818122466}
-  - component: {fileID: 373717934718711907}
   - component: {fileID: -6133830932764279799}
+  - component: {fileID: 4763507934919828066}
   m_Layer: 0
   m_Name: GimnasioClimaR
   m_TagString: ClimaR
@@ -86,20 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &373717934718711907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1702380229856959466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a876a84c3285564483abc8f3f40563f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Nombre: Gimnasio
-  Tipo: Clima
 --- !u!61 &-6133830932764279799
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -145,3 +131,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 15.001465, y: 21}
   m_EdgeRadius: 0
+--- !u!114 &4763507934919828066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702380229856959466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b135489033221164988930f3766d73eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Gimnasio
+  Attack: 0
+  Tipo: Clima
+  ContadorFisicoP: {fileID: 0}
+  ContadorFisicoR: {fileID: 0}

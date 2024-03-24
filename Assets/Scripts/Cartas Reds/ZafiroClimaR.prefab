@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6565877863775589426}
   - component: {fileID: 289206288474182779}
-  - component: {fileID: 7285097516212405570}
   - component: {fileID: 249466961715573797}
+  - component: {fileID: 9000305205726275667}
   m_Layer: 0
   m_Name: ZafiroClimaR
   m_TagString: ClimaR
@@ -86,20 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7285097516212405570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5637605987698409346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a876a84c3285564483abc8f3f40563f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Nombre: Zafiro
-  Tipo: Clima
 --- !u!61 &249466961715573797
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -145,3 +131,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 15.001465, y: 21}
   m_EdgeRadius: 0
+--- !u!114 &9000305205726275667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5637605987698409346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b135489033221164988930f3766d73eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Zafiro
+  Attack: 0
+  Tipo: Clima
+  ContadorFisicoP: {fileID: 0}
+  ContadorFisicoR: {fileID: 0}
