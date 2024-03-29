@@ -146,5 +146,6 @@ MonoBehaviour:
   Name: Caballero
   Attack: 0
   Tipo: Despeje
+  doubleStat: 0
   ContadorFisicoP: {fileID: 0}
   ContadorFisicoR: {fileID: 0}

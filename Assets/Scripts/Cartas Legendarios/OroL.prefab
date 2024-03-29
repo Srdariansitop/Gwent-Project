@@ -49,6 +49,9 @@ MonoBehaviour:
   Name: Mewtwo
   Attack: 1500
   Tipo: Oro
+  doubleStat: 0
+  ContadorFisicoP: {fileID: 0}
+  ContadorFisicoR: {fileID: 0}
 --- !u!212 &5396203993104370577
 SpriteRenderer:
   m_ObjectHideFlags: 0

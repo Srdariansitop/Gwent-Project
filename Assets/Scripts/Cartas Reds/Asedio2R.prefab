@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8020566890905818090}
   - component: {fileID: 2825001003742777599}
   - component: {fileID: 873521786470896951}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Asedio2R
   m_TagString: AsedioR
   m_Icon: {fileID: 0}
@@ -101,6 +101,9 @@ MonoBehaviour:
   Name: Aerodactyl
   Attack: 600
   Tipo: Asedio
+  doubleStat: 0
+  ContadorFisicoP: {fileID: 0}
+  ContadorFisicoR: {fileID: 0}
 --- !u!61 &873521786470896951
 BoxCollider2D:
   m_ObjectHideFlags: 0

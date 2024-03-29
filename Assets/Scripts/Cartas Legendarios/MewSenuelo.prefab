@@ -49,6 +49,9 @@ MonoBehaviour:
   Name: Mew
   Attack: 0
   Tipo: Senuelo
+  doubleStat: 0
+  ContadorFisicoP: {fileID: 0}
+  ContadorFisicoR: {fileID: 0}
 --- !u!212 &1552373148117001780
 SpriteRenderer:
   m_ObjectHideFlags: 0

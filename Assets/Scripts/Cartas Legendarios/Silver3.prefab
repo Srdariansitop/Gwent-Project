@@ -49,6 +49,9 @@ MonoBehaviour:
   Name: Giratina
   Attack: 1000
   Tipo: Silver
+  doubleStat: 0
+  ContadorFisicoP: {fileID: 0}
+  ContadorFisicoR: {fileID: 0}
 --- !u!212 &4743343705605472094
 SpriteRenderer:
   m_ObjectHideFlags: 0

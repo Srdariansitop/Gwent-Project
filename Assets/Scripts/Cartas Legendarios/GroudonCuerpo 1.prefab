@@ -49,6 +49,9 @@ MonoBehaviour:
   Name: Groudon
   Attack: 500
   Tipo: Cuerpo a Cuerpo
+  doubleStat: 0
+  ContadorFisicoP: {fileID: 0}
+  ContadorFisicoR: {fileID: 0}
 --- !u!212 &1962016215439872481
 SpriteRenderer:
   m_ObjectHideFlags: 0

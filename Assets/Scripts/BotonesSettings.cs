@@ -10,6 +10,7 @@ public class BotonesSettings : MonoBehaviour
 public GameObject mainCameraa;
 private  int Turnos;
 private int Rondas;
+private int RondasRival;
 public Text Turnosstring;
 //Regresar
 private GameObject panel;
@@ -32,12 +33,14 @@ public void Activar()
         mainCameraa.SetActive(false);
         cameranew.SetActive(true);
         Turnos++;
+    
     }
     else
     {
         mainCameraa.SetActive(true);
         cameranew.SetActive(false);
         Turnos++;
+      
     }
 }
 
@@ -49,6 +52,52 @@ public void Regresar()
    panel.transform.localScale = Vector3.zero;
   }     
 }
+public void GanadorRonda()
+{
+  if(Turnos % 2 == 0)
+  {
+    
+    int contador = CardUnidad.Contador;
+    int ContadorRival = CardUnidad.ContadorRival;
+    if(contador > ContadorRival)
+    {
+       Rondas++;
+       if(Rondas == 3)
+       {
+        Debug.Log("El ganador ha sido el equipo de Red");
+       }
+        mainCameraa.SetActive(true);
+        cameranew.SetActive(false);
+        Turnos = 1;
+        CardUnidad.ReiniciarPuntaje(0);
+        CardUnidad.ReiniciarPuntajeRival(0);
+    }
+    else if(contador == ContadorRival)
+    {
+
+      Debug.Log("Sigan jugando");
+    }
+    else
+    {
+      RondasRival++;
+      if(RondasRival == 3)
+      {
+        Debug.Log("El ganador ha sido el equipo de los legendarios");
+      }
+       mainCameraa.SetActive(false);
+       cameranew.SetActive(true);
+       Turnos = 1;
+       CardUnidad.ReiniciarPuntaje(0);
+       CardUnidad.ReiniciarPuntajeRival(0);
+    }
+  } 
+  else
+  {
+    Debug.Log("Tiene q jugar el rival");
+  } 
+}
+
+
 void Update()
 {
   if(Turnosstring != null)

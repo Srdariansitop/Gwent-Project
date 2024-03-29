@@ -101,6 +101,9 @@ MonoBehaviour:
   Name: Lugia
   Attack: 600
   Tipo: Distancia
+  doubleStat: 0
+  ContadorFisicoP: {fileID: 0}
+  ContadorFisicoR: {fileID: 0}
 --- !u!61 &6926017481994315644
 BoxCollider2D:
   m_ObjectHideFlags: 0

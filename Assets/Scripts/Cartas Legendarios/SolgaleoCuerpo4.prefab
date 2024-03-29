@@ -101,6 +101,9 @@ MonoBehaviour:
   Name: Solgaleo
   Attack: 400
   Tipo: Cuerpo a Cuerpo
+  doubleStat: 0
+  ContadorFisicoP: {fileID: 0}
+  ContadorFisicoR: {fileID: 0}
 --- !u!61 &-7277602072462594104
 BoxCollider2D:
   m_ObjectHideFlags: 0

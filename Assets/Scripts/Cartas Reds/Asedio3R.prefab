@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2639283697984081525}
   - component: {fileID: 5441550773576461777}
   - component: {fileID: -73978969944962238}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Asedio3R
   m_TagString: AsedioR
   m_Icon: {fileID: 0}
@@ -101,6 +101,9 @@ MonoBehaviour:
   Name: Zoroak
   Attack: 300
   Tipo: Asedio
+  doubleStat: 0
+  ContadorFisicoP: {fileID: 0}
+  ContadorFisicoR: {fileID: 0}
 --- !u!61 &-73978969944962238
 BoxCollider2D:
   m_ObjectHideFlags: 0

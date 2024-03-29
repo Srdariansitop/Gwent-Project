@@ -146,5 +146,6 @@ MonoBehaviour:
   Name: Eternal
   Attack: 500
   Tipo: Aumento
+  doubleStat: 0
   ContadorFisicoP: {fileID: 0}
   ContadorFisicoR: {fileID: 0}

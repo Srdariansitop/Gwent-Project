@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3792914304486086925}
   - component: {fileID: 2624058977678639780}
   - component: {fileID: -3278233496012827182}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Asedio4R
   m_TagString: AsedioR
   m_Icon: {fileID: 0}
@@ -101,6 +101,9 @@ MonoBehaviour:
   Name: Gyrados Rojo
   Attack: 400
   Tipo: Asedio
+  doubleStat: 0
+  ContadorFisicoP: {fileID: 0}
+  ContadorFisicoR: {fileID: 0}
 --- !u!61 &-3278233496012827182
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 349395647072445991}
   - component: {fileID: 5567291765545663196}
   - component: {fileID: 5000516577494359597}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Asedio1R
   m_TagString: AsedioR
   m_Icon: {fileID: 0}
@@ -101,6 +101,9 @@ MonoBehaviour:
   Name: Absol
   Attack: 500
   Tipo: Asedio
+  doubleStat: 0
+  ContadorFisicoP: {fileID: 0}
+  ContadorFisicoR: {fileID: 0}
 --- !u!61 &5000516577494359597
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -101,6 +101,9 @@ MonoBehaviour:
   Name: Hoopa
   Attack: 1400
   Tipo: Silver
+  doubleStat: 0
+  ContadorFisicoP: {fileID: 0}
+  ContadorFisicoR: {fileID: 0}
 --- !u!61 &-5034966135187836541
 BoxCollider2D:
   m_ObjectHideFlags: 0

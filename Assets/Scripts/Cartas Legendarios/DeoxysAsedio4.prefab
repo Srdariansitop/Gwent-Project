@@ -101,6 +101,9 @@ MonoBehaviour:
   Name: Deoxys
   Attack: 700
   Tipo: Asedio
+  doubleStat: 0
+  ContadorFisicoP: {fileID: 0}
+  ContadorFisicoR: {fileID: 0}
 --- !u!61 &-3684215735658017261
 BoxCollider2D:
   m_ObjectHideFlags: 0

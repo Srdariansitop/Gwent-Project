@@ -30,11 +30,17 @@ private GameObject spriteGigante;
  public int doubleStat ;
 
  //Contadores
- private static int Contador;
-private static int ContadorRival;
+ public static int Contador;
+public static int ContadorRival;
 
 public Text ContadorFisicoP;
 public Text ContadorFisicoR;
+
+//Canvas
+public Transform canvasTransform;
+
+//Cementerio
+
 
 
     // Start is called before the first frame update
@@ -50,12 +56,18 @@ public Text ContadorFisicoR;
         spriteRenderer = spriteGigante.GetComponent<SpriteRenderer>();
          spriteGigante.transform.localScale = Vector3.zero;
           panel = GameObject.FindGameObjectWithTag("Invocar");
+          
             if(panel != null)
             {
               panel.transform.localScale = Vector3.zero;
              
               
-            }     
+            } 
+
+            //Canvas
+        
+  
+
     }
    void OnMouseEnter()
   {
@@ -81,6 +93,20 @@ public void Invocar()
 {
   
 #region Mi Campo
+//Canvas
+       GameObject canvasObject = GameObject.FindGameObjectWithTag("Tablero");
+        if (canvasObject != null)
+        {
+            Transform canvasTransform = canvasObject.transform;
+             objectoInvocado.transform.SetParent(canvasTransform, false); 
+            Debug.Log("Canvas encontrado");
+        }
+        else
+        {
+            Debug.LogError("Canvas no encontrado. Asigna el tag correcto al Canvas en la jerarquía.");
+        } 
+    
+ 
   Debug.Log(objectoInvocado.tag);
  
   #region AsedioRed
@@ -91,8 +117,9 @@ public void Invocar()
          {
             GameObject posx = GameObject.Find("Asedio1Espacio1");
             Vector3 posy = posx.transform.position;
-            objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+            objectoInvocado.transform.position = new Vector3(posy.x , posy.y  , posy.z);
             posicionescampo[2,0] = true;
+             objectoInvocado.transform.localScale = new Vector3(4f,4f,0);
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
             if(ActiveEfects[1,4] == true)
             {
@@ -115,7 +142,8 @@ public void Invocar()
          {
            GameObject posx = GameObject.Find("Asedio1Espacio2");
             Vector3 posy = posx.transform.position;
-            objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+            objectoInvocado.transform.position = new Vector3(posy.x , posy.y , posy.z);
+             objectoInvocado.transform.localScale = new Vector3(4f,4f,0);
             posicionescampo[2,1] = true;
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfects[1,4] == true)
@@ -139,7 +167,8 @@ public void Invocar()
          {
             GameObject posx = GameObject.Find("Asedio1Espacio3");
             Vector3 posy = posx.transform.position;
-            objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+            objectoInvocado.transform.position = new Vector3(posy.x , posy.y , posy.z);
+            objectoInvocado.transform.localScale = new Vector3(4f,4f,0);
             posicionescampo[2,2] = true;
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfects[1,4] == true)
@@ -1480,6 +1509,15 @@ else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Pajaros" && ActiveEf
 #endregion
 }
 
+//Cambios de Turnos
+public static void ReiniciarPuntaje(int puntaje)
+{
+ Contador = puntaje;
+}
+public static void ReiniciarPuntajeRival(int puntaje)
+{
+   ContadorRival = puntaje;
+}
    void Update()
    {
      

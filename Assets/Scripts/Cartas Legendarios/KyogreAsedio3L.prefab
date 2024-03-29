@@ -101,6 +101,9 @@ MonoBehaviour:
   Name: Kyogre
   Attack: 500
   Tipo: Asedio
+  doubleStat: 0
+  ContadorFisicoP: {fileID: 0}
+  ContadorFisicoR: {fileID: 0}
 --- !u!61 &-4273569433393654879
 BoxCollider2D:
   m_ObjectHideFlags: 0

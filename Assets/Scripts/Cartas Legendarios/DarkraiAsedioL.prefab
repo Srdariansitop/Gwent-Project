@@ -49,6 +49,9 @@ MonoBehaviour:
   Name: Darkrai
   Attack: 600
   Tipo: Asedio
+  doubleStat: 0
+  ContadorFisicoP: {fileID: 0}
+  ContadorFisicoR: {fileID: 0}
 --- !u!212 &5922762462236496378
 SpriteRenderer:
   m_ObjectHideFlags: 0
