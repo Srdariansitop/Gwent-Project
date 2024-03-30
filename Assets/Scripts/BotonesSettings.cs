@@ -5,22 +5,23 @@ using UnityEngine.UI;
 
 public class BotonesSettings : MonoBehaviour
 {
-  //Camaras
-  public GameObject cameranew;
+  
 public GameObject mainCameraa;
 private  int Turnos;
 private int Rondas;
 private int RondasRival;
 public Text Turnosstring;
+//Contadores
+public Text Contador;
+public Text ContadoresRival;
 //Regresar
 private GameObject panel;
-
+private bool Condition;
 
 
 void Start()
 {
-    mainCameraa.SetActive(true);
-    cameranew.SetActive(false);
+    
     Rondas = 1;
     Turnos = 1;
 }
@@ -28,19 +29,22 @@ void Start()
 public void Activar()
 {
   Debug.Log("mbappe");
-    if (mainCameraa.activeSelf)
+    if (Condition == false)
     {
-        mainCameraa.SetActive(false);
-        cameranew.SetActive(true);
         Turnos++;
-    
+        Contador.transform.rotation = Quaternion.Euler(180,180,0);
+        ContadoresRival.transform.rotation =  Quaternion.Euler(0,0,0);
+        mainCameraa.transform.rotation = Quaternion.Euler(180,180,0);
+        Condition = true;
     }
     else
     {
-        mainCameraa.SetActive(true);
-        cameranew.SetActive(false);
+        
         Turnos++;
-      
+       ContadoresRival.transform.rotation = Quaternion.Euler(180,180,0);
+        Contador.transform.rotation =  Quaternion.Euler(0,0,0);
+        mainCameraa.transform.rotation = Quaternion.Euler(0,0,0);
+        Condition = false;
     }
 }
 
@@ -66,11 +70,11 @@ public void GanadorRonda()
        {
         Debug.Log("El ganador ha sido el equipo de Red");
        }
-        mainCameraa.SetActive(true);
-        cameranew.SetActive(false);
+       mainCameraa.transform.rotation = Quaternion.Euler(0,0,0);
         Turnos = 1;
         CardUnidad.ReiniciarPuntaje(0);
         CardUnidad.ReiniciarPuntajeRival(0);
+        Condition = false;
     }
     else if(contador == ContadorRival)
     {
@@ -84,11 +88,11 @@ public void GanadorRonda()
       {
         Debug.Log("El ganador ha sido el equipo de los legendarios");
       }
-       mainCameraa.SetActive(false);
-       cameranew.SetActive(true);
+      mainCameraa.transform.rotation = Quaternion.Euler(180,180,0);
        Turnos = 1;
        CardUnidad.ReiniciarPuntaje(0);
        CardUnidad.ReiniciarPuntajeRival(0);
+       Condition = true;
     }
   } 
   else

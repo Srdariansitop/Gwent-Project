@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -18,8 +19,8 @@ private GameObject spriteGigante;
  //Mascara boleana para posiciones
  private static bool [,] posicionescampo;
  private static bool [,] posicionescamporival;
-  private bool[,] posicionescartasmagicas;
- private bool [,] posicionescartasmagicasrival;
+  private static bool[,] posicionescartasmagicas;
+ private static bool [,] posicionescartasmagicasrival;
  private static bool LeaderPos;
  private static bool LeaderRivalPos;
  //Mascara Boleeanas para verificar activacion del efecto
@@ -40,7 +41,7 @@ public Text ContadorFisicoR;
 public Transform canvasTransform;
 
 //Cementerio
-
+List<GameObject> Cementary = new List<GameObject>();
 
 
     // Start is called before the first frame update
@@ -105,7 +106,7 @@ public void Invocar()
         {
             Debug.LogError("Canvas no encontrado. Asigna el tag correcto al Canvas en la jerarquía.");
         } 
-    
+    objectoInvocado.transform.localScale = new Vector3(2f,2f,0);
  
   Debug.Log(objectoInvocado.tag);
  
@@ -119,7 +120,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y  , posy.z);
             posicionescampo[2,0] = true;
-             objectoInvocado.transform.localScale = new Vector3(4f,4f,0);
+             
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
             if(ActiveEfects[1,4] == true)
             {
@@ -143,7 +144,7 @@ public void Invocar()
            GameObject posx = GameObject.Find("Asedio1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , posy.z);
-             objectoInvocado.transform.localScale = new Vector3(4f,4f,0);
+            
             posicionescampo[2,1] = true;
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfects[1,4] == true)
@@ -168,7 +169,7 @@ public void Invocar()
             GameObject posx = GameObject.Find("Asedio1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , posy.z);
-            objectoInvocado.transform.localScale = new Vector3(4f,4f,0);
+            
             posicionescampo[2,2] = true;
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfects[1,4] == true)
@@ -1369,6 +1370,132 @@ public void Efecto()
  }
 
 #endregion
+#region Despeje 
+else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Amistad")
+{
+   Cementary.Add(objectoInvocado);
+   objectoInvocado.transform.position = new Vector3(200f,200f,200f);
+  if(posicionescartasmagicasrival[0,1] == true)
+  {
+    GameObject canvass = GameObject.Find("Tablero");
+    
+    if(canvass != null)
+    {
+      Transform cartaTransform = canvass.transform.Find("ColosalClima(Clone)");
+      Transform cartaTransform2 = canvass.transform.Find("MundoInversoClima(Clone)");
+      Transform cartaTransform3 = canvass.transform.Find("Isla Espuma(Clone)");
+      if(cartaTransform != null)
+      {
+        GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        posicionescartasmagicasrival[0,1] = false;
+      }
+      else if(cartaTransform2 != null)
+      {
+        GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,00f);
+        cartaaeliminar.transform.SetParent(null);
+         posicionescartasmagicasrival[0,1] = false;
+      }
+      else if(cartaTransform3 != null)
+      {
+        GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         posicionescartasmagicasrival[0,1] = false;
+      }
+      else
+      {
+        Debug.Log("No hay cartas climas invocados");
+      }
+    }
+  }
+  else if(posicionescartasmagicasrival[1,1] == true)
+  {
+GameObject canvass = GameObject.Find("Tablero");
+    if(canvass != null)
+    {
+      Transform cartaTransform = canvass.transform.Find("ColosalClima(Clone)");
+      Transform cartaTransform2 = canvass.transform.Find("MundoInversoClima(Clone)");
+      Transform cartaTransform3 = canvass.transform.Find("Isla Espuma(Clone)");
+      if(cartaTransform != null)
+      {
+        GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        posicionescartasmagicasrival[1,1] = false;
+      }
+      else if(cartaTransform2 != null)
+      {
+        GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        posicionescartasmagicasrival[1,1] = false;
+      }
+      else if(cartaTransform3 != null)
+      {
+        GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        posicionescartasmagicasrival[1,1] = false;
+      }
+      else
+      {
+        Debug.Log("No hay cartas climas invocados");
+      }
+    }
+  }
+  else if(posicionescartasmagicasrival[2,1] == true)
+  {
+    GameObject canvass = GameObject.Find("Tablero");
+    if(canvass != null)
+    {
+      Transform cartaTransform = canvass.transform.Find("ColosalClima(Clone)");
+      Transform cartaTransform2 = canvass.transform.Find("MundoInversoClima(Clone)");
+      Transform cartaTransform3 = canvass.transform.Find("Isla Espuma(Clone)");
+      if(cartaTransform != null)
+      {
+        GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        posicionescartasmagicasrival[2,1] = false;
+      }
+      else if(cartaTransform2 != null)
+      {
+        GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        posicionescartasmagicasrival[2,1] = false;
+      }
+      else if(cartaTransform3 != null)
+      {
+        GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        posicionescartasmagicasrival[2,1] = false;
+      }
+      else
+      {
+        Debug.Log("No hay cartas climas invocados");
+      }
+    }
+  }
+  else
+  {
+   Debug.Log("No habia ninguna carta clima invocada");
+  }
+}
+#endregion
 //Campo Rival
 #region Aumentos Efecto Legendarios
 else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Pajaros" && ActiveEfectsRival[0,4] == false)
@@ -1506,6 +1633,59 @@ else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Pajaros" && ActiveEf
     ContadorRival -= (objectoInvocado.GetComponent<CardUnidad>().doubleStat ) * contnegativo;
     ActiveEfectsRival[2,0] = true;
  }
+#endregion
+#region Despeje Rival
+else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Caballero")
+{
+   Cementary.Add(objectoInvocado);
+   objectoInvocado.transform.position = new Vector3(200f,200f,200f);
+   //Condiciones 
+   int cantidadtemporal = 0;
+   int cantidadtemporal2 = 0;
+   for(int i = 0 ; i < 3 ; i++)
+   {
+      if(posicionescartasmagicas[i,1] == true )
+      {
+         cantidadtemporal++;
+      }
+   }
+   for(int i = 0 ; i < 3 ; i++)
+   {
+    if(posicionescamporival[i,1] == true)
+     {
+       cantidadtemporal2++;
+     }
+   }
+   if(cantidadtemporal >= 2 && cantidadtemporal2 >= 1)
+   {
+     GameObject canvass = GameObject.Find("Tablero");
+     Transform cartaTransform = canvass.transform.Find("ColosalClima(Clone)");
+     Transform cartaTransform2 = canvass.transform.Find("MundoInversoClima(Clone)");
+     Transform cartaTransform3 = canvass.transform.Find("Isla Espuma(Clone)");
+     Transform cartaTransform4 = canvass.transform.Find("ZafiroClimaR(Clone)");
+     Transform cartaTransform5 = canvass.transform.Find("PrincipioClimaR (Clone)");
+     Transform cartaTransform6 = canvass.transform.Find("GimnasioClimaR(Clone)");
+     if(cartaTransform4 != null && cartaTransform5 != null)
+     {
+       
+     }
+     else if(cartaTransform4 != null && cartaTransform6 != null)
+     {
+
+     }
+     else 
+     {
+
+     }
+
+
+   }
+   else
+   {
+      Debug.Log("No cumples las condiciones para activar el efecto");
+   }
+  
+}
 #endregion
 }
 
