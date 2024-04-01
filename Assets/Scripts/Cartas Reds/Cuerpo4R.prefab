@@ -46,9 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b135489033221164988930f3766d73eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Blastoise
+  Name: Blaziken
   Attack: 200
   Tipo: Cuerpo a Cuerpo
+  doubleStat: 0
+  ContadorFisicoP: {fileID: 0}
+  ContadorFisicoR: {fileID: 0}
+  canvasTransform: {fileID: 0}
 --- !u!212 &1916476925488047824
 SpriteRenderer:
   m_ObjectHideFlags: 0

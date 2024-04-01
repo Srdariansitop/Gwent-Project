@@ -8,8 +8,8 @@ public class BotonesSettings : MonoBehaviour
   
 public GameObject mainCameraa;
 private  int Turnos;
-private int Rondas;
-private int RondasRival;
+public static int Rondas;
+public static int RondasRival;
 public Text Turnosstring;
 //Contadores
 public Text Contador;
@@ -28,7 +28,7 @@ void Start()
 
 public void Activar()
 {
-  Debug.Log("mbappe");
+  
     if (Condition == false)
     {
         Turnos++;
@@ -75,10 +75,25 @@ public void GanadorRonda()
         CardUnidad.ReiniciarPuntaje(0);
         CardUnidad.ReiniciarPuntajeRival(0);
         Condition = false;
+        CardUnidad.VaciarCampo();
     }
     else if(contador == ContadorRival)
     {
-
+        if(CardUnidad.LeaderRivalEfect == true)
+       {
+        RondasRival++;
+      if(RondasRival == 3)
+      {
+        Debug.Log("El ganador ha sido el equipo de los legendarios");
+      }
+      mainCameraa.transform.rotation = Quaternion.Euler(180,180,0);
+       Turnos = 1;
+       CardUnidad.ReiniciarPuntaje(0);
+       CardUnidad.ReiniciarPuntajeRival(0);
+       Condition = true;
+       CardUnidad.VaciarCampo();
+       }
+       
       Debug.Log("Sigan jugando");
     }
     else
@@ -93,6 +108,7 @@ public void GanadorRonda()
        CardUnidad.ReiniciarPuntaje(0);
        CardUnidad.ReiniciarPuntajeRival(0);
        Condition = true;
+       CardUnidad.VaciarCampo();
     }
   } 
   else
