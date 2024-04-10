@@ -15,7 +15,7 @@ private GameObject spriteGigante;
  private SpriteRenderer spriteRenderer;
  private string nametag = "Show Card";
  private GameObject panel;
- private static GameObject objectoInvocado;
+ public static GameObject objectoInvocado;
  //Mascara boleana para posiciones
  private static bool [,] posicionescampo;
  private static bool [,] posicionescamporival;
@@ -43,7 +43,11 @@ public Transform canvasTransform;
 
 //Cementerio
 public static List<GameObject> Cementary = new List<GameObject>();
-
+//Invocaste?
+public static bool Invocaste;
+//Posiciones Invocadas
+public static List<int> Invocadas = new List<int>();
+public static List<int> InvocadasRival = new List<int>();
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +70,10 @@ public static List<GameObject> Cementary = new List<GameObject>();
               
             } 
     }
+
+///<summary>
+///Este metodo se utiliza para cuando pase el cursor del mouse por encima de una carta su sprite se muestre en escena
+///</summary>
    void OnMouseEnter()
   {
     spriteGigante.transform.localScale = new Vector3(0.3f,0.3f,0);
@@ -88,9 +96,13 @@ panel.transform.localScale = new Vector3(1f,1f,0);
 }
 public void Invocar()
 {
-  
-#region Mi Campo
-//Canvas
+  Debug.Log(objectoInvocado.transform.position.x);
+  Debug.Log(PositionMano());
+  Debug.Log(PosicionRivalMano());
+  if(Invocaste == false)
+  {
+    Invocaste = true;
+    #region Canvas
        GameObject canvasObject = GameObject.FindGameObjectWithTag("Tablero");
         if (canvasObject != null)
         {
@@ -103,9 +115,11 @@ public void Invocar()
             Debug.LogError("Canvas no encontrado. Asigna el tag correcto al Canvas en la jerarquía.");
         } 
     objectoInvocado.transform.localScale = new Vector3(2f,2f,0);
- 
-  Debug.Log(objectoInvocado.tag);
- 
+ #endregion
+Debug.Log(objectoInvocado.tag);
+
+
+ #region Mi Campo
   #region AsedioRed
   if(objectoInvocado.tag == "AsedioR")
   {
@@ -116,7 +130,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y  , 2f);
             posicionescampo[2,0] = true;
-             
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
             if(ActiveEfects[1,4] == true)
             {
@@ -134,13 +148,21 @@ public void Invocar()
             {
                Contador += 800;
             }
+            if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
+            if(ActiveEfectsRival[2,1] == true)
+            {
+              Contador+= 100;
+            }
          }
          else if(posicionescampo[2,1] == false)
          {
            GameObject posx = GameObject.Find("Asedio1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
-            
+            Invocadas.Add(PositionMano());
             posicionescampo[2,1] = true;
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfects[1,4] == true)
@@ -159,13 +181,21 @@ public void Invocar()
             {
                Contador += 800;
             }
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
+              if(ActiveEfectsRival[2,1] == true)
+            {
+              Contador+= 100;
+            }
          }
          else if(posicionescampo[2,2] == false)
          {
             GameObject posx = GameObject.Find("Asedio1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
-            
+            Invocadas.Add(PositionMano());
             posicionescampo[2,2] = true;
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfects[1,4] == true)
@@ -183,6 +213,14 @@ public void Invocar()
             if(ActiveEfects[2,0] == true)
             {
                Contador += 800;
+            }
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
+              if(ActiveEfectsRival[2,1] == true)
+            {
+              Contador+= 100;
             }
          }
          else
@@ -200,6 +238,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,0] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfects[0,4] == true)
             {
@@ -217,6 +256,10 @@ public void Invocar()
             {
                Contador -= 1000;
             }
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescampo[1,1] == false)
          {
@@ -224,6 +267,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,1] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
               if(ActiveEfects[0,4] == true)
             {
@@ -240,6 +284,10 @@ public void Invocar()
             if(ActiveEfects[2,0] == true)
             {
                Contador -= 1000;
+            }
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
             }
          }
          else if(posicionescampo[1,2] == false)
@@ -248,6 +296,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,2] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
               if(ActiveEfects[0,4] == true)
             {
@@ -264,6 +313,10 @@ public void Invocar()
             if(ActiveEfects[2,0] == true)
             {
                Contador -= 1000;
+            }
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
             }
          }
          else
@@ -281,6 +334,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,0] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
               if(ActiveEfects[2,4] == true)
             {
@@ -298,6 +352,10 @@ public void Invocar()
             {
                Contador -= 1000;
             }
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescampo[0,1] == false)
          {
@@ -305,6 +363,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,1] = true; 
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
               if(ActiveEfects[2,4] == true)
             {
@@ -321,6 +380,10 @@ public void Invocar()
             if(ActiveEfects[2,0] == true)
             {
                Contador -= 1000;
+            }
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
             }
          }
          else if(posicionescampo[0,2] == false)
@@ -329,6 +392,7 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,2] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
               if(ActiveEfects[2,4] == true)
             {
@@ -345,6 +409,10 @@ public void Invocar()
             if(ActiveEfects[2,0] == true)
             {
                Contador -= 1000;
+            }
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
             }
          }
          else
@@ -362,7 +430,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,0] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescampo[2,1] == false)
          {
@@ -370,7 +443,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,1] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescampo[2,2] == false)
          {
@@ -378,7 +456,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,2] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
 
 
@@ -388,7 +471,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,0] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescampo[1,1] == false)
          {
@@ -396,7 +484,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,1] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescampo[1,2] == false)
          {
@@ -404,7 +497,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,2] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
         else  if(posicionescampo[0,0] == false)
          {
@@ -412,7 +510,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,0] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescampo[0,1] == false)
          {
@@ -420,7 +523,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,1] = true; 
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescampo[0,2] == false)
          {
@@ -428,7 +536,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,2] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else
          {
@@ -446,7 +559,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,0] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescampo[2,1] == false)
          {
@@ -454,7 +572,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,1] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescampo[2,2] == false)
          {
@@ -462,7 +585,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,2] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
 
 
@@ -472,7 +600,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,0] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescampo[1,1] == false)
          {
@@ -480,7 +613,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,1] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescampo[1,2] == false)
          {
@@ -488,7 +626,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,2] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
         else  if(posicionescampo[0,0] == false)
          {
@@ -496,7 +639,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,0] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescampo[0,1] == false)
          {
@@ -504,6 +652,11 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,1] = true; 
+            Invocadas.Add(PositionMano());
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescampo[0,2] == false)
          {
@@ -511,7 +664,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,2] = true;
+            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
           else
          {
@@ -529,7 +687,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,0] = true;
+            Invocadas.Add(PositionMano());
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescamporival[2,1] == false)
          {
@@ -537,7 +700,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,1] = true;
+            Invocadas.Add(PositionMano());
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescamporival[2,2] == false)
          {
@@ -545,7 +713,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,2] = true;
+            Invocadas.Add(PositionMano());
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
        else  if(posicionescamporival[1,0] == false)
          {
@@ -553,7 +726,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,0] = true;
+            Invocadas.Add(PositionMano());
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescamporival[1,1] == false)
          {
@@ -561,7 +739,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,1] = true;
+            Invocadas.Add(PositionMano());
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescamporival[1,2] == false)
          {
@@ -569,7 +752,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,2] = true;
+            Invocadas.Add(PositionMano());
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescamporival[0,0] == false)
          {
@@ -577,7 +765,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,0] = true;
+            Invocadas.Add(PositionMano());
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescamporival[0,1] == false)
          {
@@ -585,7 +778,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,1] = true; 
+            Invocadas.Add(PositionMano());
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescamporival[0,2] == false)
          {
@@ -593,7 +791,12 @@ public void Invocar()
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,2] = true;
+            Invocadas.Add(PositionMano());
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+             if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else
          {
@@ -608,7 +811,12 @@ else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     LeaderPos = true;
+    Invocadas.Add(PositionMano());
     Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
+     if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
 }
  #endregion
  #region Aumento
@@ -618,6 +826,11 @@ else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     posicionescartasmagicas[0,0] = true;
+    Invocadas.Add(PositionMano());
+     if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
    
  }
  else if(objectoInvocado.tag == "AumentoRA")
@@ -626,6 +839,11 @@ else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     posicionescartasmagicas[1,0] = true;
+    Invocadas.Add(PositionMano());
+     if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
  }
  else if(objectoInvocado.tag == "AumentoRC")
  {
@@ -633,6 +851,11 @@ else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     posicionescartasmagicas[2,0] = true;
+    Invocadas.Add(PositionMano());
+     if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
  }
  #endregion
  #region Clima
@@ -644,6 +867,11 @@ else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     posicionescartasmagicas[0,1] = true;
+    Invocadas.Add(PositionMano());
+     if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
    }
    else if(posicionescartasmagicas[1,1] == false)
    {
@@ -651,6 +879,11 @@ else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     posicionescartasmagicas[1,1] = true;
+    Invocadas.Add(PositionMano());
+     if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
    }
    else if(posicionescartasmagicas[2,1] == false)
    {
@@ -658,6 +891,11 @@ else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     posicionescartasmagicas[2,1] = true;
+    Invocadas.Add(PositionMano());
+     if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
    }
    else
    {
@@ -667,7 +905,6 @@ else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
  #endregion
   #endregion
 
-//Rival
 #region Campo Rival
 #region Asedio Rival
 if(objectoInvocado.tag == "Asedio1")
@@ -675,6 +912,7 @@ if(objectoInvocado.tag == "Asedio1")
 
      if(posicionescamporival[2,0] == false)
          {
+            InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Asedio2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -696,9 +934,14 @@ if(objectoInvocado.tag == "Asedio1")
             {
                ContadorRival += 400;
             }
+              if(ActiveEfectsRival[2,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescamporival[2,1] == false)
          {
+           InvocadasRival.Add(PosicionRivalMano());
            GameObject posx = GameObject.Find("Asedio2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -720,9 +963,14 @@ if(objectoInvocado.tag == "Asedio1")
             {
                ContadorRival += 400;
             }
+               if(ActiveEfectsRival[2,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else if(posicionescamporival[2,2] == false)
          {
+           InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Asedio2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -744,6 +992,10 @@ if(objectoInvocado.tag == "Asedio1")
             {
                ContadorRival += 400;
             }
+               if(ActiveEfectsRival[2,1] == true)
+            {
+              ContadorRival+= 100;
+            }
          }
          else
          {
@@ -756,6 +1008,12 @@ else if(objectoInvocado.tag == "Distancia1")
   {
     if(posicionescamporival[1,0] == false)
          {
+          Debug.Log(objectoInvocado.transform.position.x);
+          Debug.Log(PosicionRivalMano());
+          InvocadasRival.Add(PosicionRivalMano());
+          
+        
+          
             GameObject posx = GameObject.Find("Distancia2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -780,6 +1038,7 @@ else if(objectoInvocado.tag == "Distancia1")
          }
          else if(posicionescamporival[1,1] == false)
          {
+            InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Distancia2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -804,6 +1063,7 @@ else if(objectoInvocado.tag == "Distancia1")
          }
          else if(posicionescamporival[1,2] == false)
          {
+            InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Distancia2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -838,6 +1098,7 @@ else if(objectoInvocado.tag == "Distancia1")
   {
          if(posicionescamporival[0,0] == false)
          {
+            InvocadasRival.Add(PosicionRivalMano());
              GameObject posx = GameObject.Find("Cuerpo2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -862,6 +1123,7 @@ else if(objectoInvocado.tag == "Distancia1")
          }
          else if(posicionescamporival[0,1] == false)
          {
+          InvocadasRival.Add(PosicionRivalMano());
            GameObject posx = GameObject.Find("Cuerpo2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -886,6 +1148,7 @@ else if(objectoInvocado.tag == "Distancia1")
          }
          else if(posicionescamporival[0,2] == false)
          {
+          InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Cuerpo2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -919,75 +1182,92 @@ else if(objectoInvocado.tag == "Oro1")
 {
   if(posicionescamporival[2,0] == false)
          {
+          InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Asedio2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,0] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            
          }
          else if(posicionescamporival[2,1] == false)
          {
+          InvocadasRival.Add(PosicionRivalMano());
            GameObject posx = GameObject.Find("Asedio2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,1] = true;
-            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;  
          }
          else if(posicionescamporival[2,2] == false)
          {
+          InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Asedio2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,2] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            
          }
        else  if(posicionescamporival[1,0] == false)
          {
+          InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Distancia2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,0] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            
          }
          else if(posicionescamporival[1,1] == false)
          {
+          InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Distancia2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,1] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            
          }
          else if(posicionescamporival[1,2] == false)
          {
+          InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Distancia2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,2] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            
          }
          else if(posicionescamporival[0,0] == false)
          {
+           InvocadasRival.Add(PosicionRivalMano());
              GameObject posx = GameObject.Find("Cuerpo2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,0] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+           
          }
          else if(posicionescamporival[0,1] == false)
          {
+          InvocadasRival.Add(PosicionRivalMano());
            GameObject posx = GameObject.Find("Cuerpo2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,1] = true; 
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            
          }
          else if(posicionescamporival[0,2] == false)
          {
+           InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Cuerpo2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,2] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+           
          }
          else
          {
@@ -1001,75 +1281,93 @@ else if(objectoInvocado.tag == "Silver1")
 {
    if(posicionescamporival[2,0] == false)
          {
+          InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Asedio2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,0] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            
          }
          else if(posicionescamporival[2,1] == false)
          {
+          InvocadasRival.Add(PosicionRivalMano());
            GameObject posx = GameObject.Find("Asedio2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,1] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            
          }
          else if(posicionescamporival[2,2] == false)
          {
+          InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Asedio2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,2] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            
          }
        else  if(posicionescamporival[1,0] == false)
          {
+          InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Distancia2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,0] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            
          }
          else if(posicionescamporival[1,1] == false)
          {
+           InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Distancia2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,1] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+           
          }
          else if(posicionescamporival[1,2] == false)
          {
+          InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Distancia2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,2] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            
          }
          else if(posicionescamporival[0,0] == false)
          {
+           InvocadasRival.Add(PosicionRivalMano());
              GameObject posx = GameObject.Find("Cuerpo2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,0] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+           
          }
          else if(posicionescamporival[0,1] == false)
          {
+           InvocadasRival.Add(PosicionRivalMano());
            GameObject posx = GameObject.Find("Cuerpo2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,1] = true; 
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+           
          }
          else if(posicionescamporival[0,2] == false)
          {
+           InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Cuerpo2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,2] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+           
          }
          else
          {
@@ -1082,43 +1380,53 @@ else if(objectoInvocado.tag == "Senuelo1")
 {
   if(posicionescamporival[2,0] == false)
          {
+          InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Asedio2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,0] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            
          }
          else if(posicionescamporival[2,1] == false)
          {
+          InvocadasRival.Add(PosicionRivalMano());
            GameObject posx = GameObject.Find("Asedio2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,1] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            
          }
          else if(posicionescamporival[2,2] == false)
          {
+          InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Asedio2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,2] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            
          }
        else  if(posicionescamporival[1,0] == false)
          {
+          InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Distancia2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,0] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            
          }
          else if(posicionescamporival[1,1] == false)
          {
+           InvocadasRival.Add(PosicionRivalMano());
             GameObject posx = GameObject.Find("Distancia2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,1] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+           
          }
          else if(posicionescamporival[1,2] == false)
          {
@@ -1127,6 +1435,7 @@ else if(objectoInvocado.tag == "Senuelo1")
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,2] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            InvocadasRival.Add(PosicionRivalMano());
          }
          else if(posicionescamporival[0,0] == false)
          {
@@ -1135,6 +1444,7 @@ else if(objectoInvocado.tag == "Senuelo1")
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,0] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            InvocadasRival.Add(PosicionRivalMano());
          }
          else if(posicionescamporival[0,1] == false)
          {
@@ -1143,6 +1453,7 @@ else if(objectoInvocado.tag == "Senuelo1")
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,1] = true; 
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            InvocadasRival.Add(PosicionRivalMano());
          }
          else if(posicionescamporival[0,2] == false)
          {
@@ -1151,6 +1462,7 @@ else if(objectoInvocado.tag == "Senuelo1")
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,2] = true;
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            InvocadasRival.Add(PosicionRivalMano());
          }
          else
          {
@@ -1161,33 +1473,41 @@ else if(objectoInvocado.tag == "Senuelo1")
 #region Lider Rival
 else if(objectoInvocado.tag == "Lider2" && LeaderRivalPos == false)
 {
+  InvocadasRival.Add(PosicionRivalMano());
    GameObject posx = GameObject.Find("CartaLider2");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     LeaderRivalPos = true;
+    
 }
 #endregion
 #region Aumento Rival
 else if(objectoInvocado.tag == "AumentoR2")
  {
+   InvocadasRival.Add(PosicionRivalMano());
     GameObject posx = GameObject.Find("AumentoDistancia2");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     posicionescartasmagicasrival[0,0] = true;
+   
  }
  else if(objectoInvocado.tag == "AumentoRC2")
  {
+  InvocadasRival.Add(PosicionRivalMano());
   GameObject posx = GameObject.Find("AumentoCuerpo2");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     posicionescartasmagicasrival[1,0] = true;
+    
  }
  else if(objectoInvocado.tag == "AumentoRA2")
  {
+  InvocadasRival.Add(PosicionRivalMano());
    GameObject posx = GameObject.Find("AumentoAsedio2");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     posicionescartasmagicasrival[2,0] = true;
+    
  }
 #endregion
 #region Clima Rival
@@ -1195,24 +1515,30 @@ else if(objectoInvocado.tag == "ClimaL")
  {
    if(posicionescartasmagicasrival[0,1] == false)
    {
+    InvocadasRival.Add(PosicionRivalMano());
      GameObject posx = GameObject.Find("Clima4");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     posicionescartasmagicasrival[0,1] = true;
+    
    }
    else if(posicionescartasmagicasrival[1,1] == false)
    {
+    InvocadasRival.Add(PosicionRivalMano());
        GameObject posx = GameObject.Find("Clima5");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     posicionescartasmagicasrival[1,1] = true;
+    
    }
    else if(posicionescartasmagicasrival[2,1] == false)
    {
+    InvocadasRival.Add(PosicionRivalMano());
       GameObject posx = GameObject.Find("Clima6");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     posicionescartasmagicasrival[2,1] = true;
+    
    }
    else
    {
@@ -1221,6 +1547,12 @@ else if(objectoInvocado.tag == "ClimaL")
  }
 #endregion
 #endregion
+  
+  }
+  else
+  {
+    Debug.Log("Solo se puede realizar una invocacion por turno");
+  }
   
 }
 public void Efecto()
@@ -1788,8 +2120,32 @@ else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Gyrados Rojo" && Act
 }
 else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Blaziken" && ActiveEfects[1,1] == false)
 {
+  ActiveEfects[1,1] = true;
    int cantidadcementary = Cementary.Count;
    Contador += cantidadcementary;
+}
+else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Pikachu" && ActiveEfects[2,1] == false)
+{
+  ActiveEfects[2,1] = true;
+  string nombrelider = "LiderR(Clone)";
+GameObject gameObject =   Cementary.Find(objecto => objecto.name == nombrelider);
+Debug.Log(gameObject);
+if(gameObject != null)
+{
+  GameObject posx = GameObject.Find("CartaLider1");
+    Vector3 posy = posx.transform.position;
+    gameObject.transform.position = new Vector3(posy.x , posy.y , 2f);
+    LeaderPos = true;
+    Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
+     if(ActiveEfectsRival[0,1] == true)
+            {
+              ContadorRival+= 100;
+            }
+}
+else
+{
+  Debug.Log("No se encontro a la carta lider en el cementerio");
+}
 }
 #region Silver 
 #endregion
@@ -1953,7 +2309,7 @@ else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Caballero")
    }
    for(int i = 0 ; i < 3 ; i++)
    {
-    if(posicionescamporival[i,1] == true)
+    if(posicionescartasmagicasrival[i,1] == true)
      {
        cantidadtemporal2++;
      }
@@ -1961,7 +2317,9 @@ else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Caballero")
    if(cantidadtemporal >= 2 && cantidadtemporal2 >= 1)
    {
      GameObject canvass = GameObject.Find("Tablero");
-     Transform cartaTransform = canvass.transform.Find("ColosalClima(Clone)");
+     if(canvass != null)
+     {
+            Transform cartaTransform = canvass.transform.Find("ColosalClima(Clone)");
      Transform cartaTransform2 = canvass.transform.Find("MundoInversoClima(Clone)");
      Transform cartaTransform3 = canvass.transform.Find("Isla Espuma(Clone)");
      Transform cartaTransform4 = canvass.transform.Find("ZafiroClimaR(Clone)");
@@ -1969,18 +2327,3505 @@ else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Caballero")
      Transform cartaTransform6 = canvass.transform.Find("GimnasioClimaR(Clone)");
      if(cartaTransform4 != null && cartaTransform5 != null)
      {
+       GameObject cartaaeliminate = cartaTransform4.gameObject;
+        Cementary.Add(cartaaeliminate);
+        cartaTransform4.position = new Vector3(200f,200f,200f);
+        cartaaeliminate.transform.SetParent(null);
+        GameObject cartaaeliminate2 = cartaTransform5.gameObject;
+        Cementary.Add(cartaaeliminate2);
+        cartaTransform5.position = new Vector3(200f,200f,200f);
+        cartaaeliminate2.transform.SetParent(null);
+        //Zafiro
+       if(ActiveEfects[2,0] == true)
+       {
+        int asediooocard = 0;
+        int cuerpoacuerpocard = 0;
+        int distanciacard = 0; 
+        ActiveEfects[2,0] = false;
+      for(int i = 0 ; i < 3 ; i++)
+    {
+      if(posicionescampo[2,i] == true)
+      {
+         asediooocard++;
+      }
+    }
+     for(int i = 0 ; i < 3 ; i++)
+    {
+      if(posicionescampo[0,i] == true)
+      {
+         cuerpoacuerpocard++;
+      }
+    }
+    for(int i = 0 ; i < 3 ; i++)
+    {
+      if(posicionescampo[1,i] == true)
+      {
+         distanciacard++;
+      }
+    }
+    Contador -= (asediooocard * 800);
+    Contador += (cuerpoacuerpocard *1000);
+    Contador += (distanciacard * 1000);
+       }
+       //Principio
+       if(ActiveEfects[1,0] == true)
+       {
+           int asediooocard = 0;
+        int cuerpoacuerpocard = 0;
+        int distanciacard = 0; 
+        ActiveEfects[2,0] = false;
+      for(int i = 0 ; i < 3 ; i++)
+    {
+      if(posicionescampo[2,i] == true)
+      {
+         asediooocard++;
+      }
+    }
+     for(int i = 0 ; i < 3 ; i++)
+    {
+      if(posicionescampo[0,i] == true)
+      {
+         cuerpoacuerpocard++;
+      }
+    }
+    for(int i = 0 ; i < 3 ; i++)
+    {
+      if(posicionescampo[1,i] == true)
+      {
+         distanciacard++;
+      }
+    }
+    Contador += (asediooocard * 500);
+    Contador += (cuerpoacuerpocard * 500);
+    Contador -= (distanciacard * 300);
+       }
+
+       if(posicionescartasmagicas[0,1] == true && posicionescartasmagicas[1,1] == true)
+       {
+        posicionescartasmagicas[0,1] = false;
+        posicionescartasmagicas[1,1] = false; 
+         if(posicionescartasmagicasrival[0,1] == true)
+         {
+             posicionescartasmagicasrival[0,1] = false;
+             if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
        
+         }
+         else if(posicionescartasmagicasrival[1,1] == true)
+         {
+            posicionescartasmagicasrival[1,1] = false;
+                       if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+  
+         }
+         else if(posicionescartasmagicasrival[2,1] == true)
+         {
+           posicionescamporival[2,1] = false;
+                      if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+       
+         }
+       
+       }
+       else if(posicionescartasmagicas[0,1] == true && posicionescartasmagicas[2,1] == true)
+       {
+        posicionescartasmagicas[0,1] = false;
+        posicionescartasmagicas[2,1] = false;
+             if(posicionescartasmagicasrival[0,1] == true)
+         {
+             posicionescartasmagicasrival[0,1] = false;
+             if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+       
+         }
+         else if(posicionescartasmagicasrival[1,1] == true)
+         {
+            posicionescartasmagicasrival[1,1] = false;
+                       if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+  
+         }
+         else if(posicionescartasmagicasrival[2,1] == true)
+         {
+           posicionescamporival[2,1] = false;
+                      if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+       
+         }
+       
+       }
+       else if(posicionescartasmagicas[1,1] == true && posicionescartasmagicas[2,1] == true)
+       {
+         posicionescartasmagicas[1,1] = false;
+         posicionescartasmagicas[2,1] = false;
+              if(posicionescartasmagicasrival[0,1] == true)
+         {
+             posicionescartasmagicasrival[0,1] = false;
+             if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+       
+         }
+         else if(posicionescartasmagicasrival[1,1] == true)
+         {
+            posicionescartasmagicasrival[1,1] = false;
+                       if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+  
+         }
+         else if(posicionescartasmagicasrival[2,1] == true)
+         {
+           posicionescamporival[2,1] = false;
+                      if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+       
+         }
+       
+       }
+     
      }
      else if(cartaTransform4 != null && cartaTransform6 != null)
      {
+      GameObject cartaaeliminate = cartaTransform4.gameObject;
+        Cementary.Add(cartaaeliminate);
+        cartaTransform4.position = new Vector3(200f,200f,200f);
+        cartaaeliminate.transform.SetParent(null);
+        GameObject cartaaeliminate2 = cartaTransform6.gameObject;
+        Cementary.Add(cartaaeliminate2);
+        cartaTransform6.position = new Vector3(200f,200f,200f);
+        cartaaeliminate2.transform.SetParent(null);
+        //Zafiro
+          if(ActiveEfects[2,0] == true)
+       {
+        int asediooocard = 0;
+        int cuerpoacuerpocard = 0;
+        int distanciacard = 0; 
+        ActiveEfects[2,0] = false;
+      for(int i = 0 ; i < 3 ; i++)
+    {
+      if(posicionescampo[2,i] == true)
+      {
+         asediooocard++;
+      }
+    }
+     for(int i = 0 ; i < 3 ; i++)
+    {
+      if(posicionescampo[0,i] == true)
+      {
+         cuerpoacuerpocard++;
+      }
+    }
+    for(int i = 0 ; i < 3 ; i++)
+    {
+      if(posicionescampo[1,i] == true)
+      {
+         distanciacard++;
+      }
+    }
+    Contador -= (asediooocard * 800);
+    Contador += (cuerpoacuerpocard *1000);
+    Contador += (distanciacard * 1000);
+       }
+       //Gimnasio
+         if(ActiveEfects[0,0] == true)
+         {
+          int asediooocard = 0;
+        int cuerpoacuerpocard = 0;
+        int distanciacard = 0; 
+        ActiveEfects[2,0] = false;
+      for(int i = 0 ; i < 3 ; i++)
+    {
+      if(posicionescampo[2,i] == true)
+      {
+         asediooocard++;
+      }
+    }
+     for(int i = 0 ; i < 3 ; i++)
+    {
+      if(posicionescampo[0,i] == true)
+      {
+         cuerpoacuerpocard++;
+      }
+    }
+    for(int i = 0 ; i < 3 ; i++)
+    {
+      if(posicionescampo[1,i] == true)
+      {
+         distanciacard++;
+      }
+    }
+    Contador += (asediooocard * 200);
+    Contador -= (cuerpoacuerpocard *400);
+    Contador += (distanciacard * 200);
+         }
 
+              if(posicionescartasmagicas[0,1] == true && posicionescartasmagicas[1,1] == true)
+       {
+        posicionescartasmagicas[0,1] = false;
+        posicionescartasmagicas[1,1] = false; 
+         if(posicionescartasmagicasrival[0,1] == true)
+         {
+             posicionescartasmagicasrival[0,1] = false;
+             if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+       
+         }
+         else if(posicionescartasmagicasrival[1,1] == true)
+         {
+            posicionescartasmagicasrival[1,1] = false;
+                       if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+  
+         }
+         else if(posicionescartasmagicasrival[2,1] == true)
+         {
+           posicionescamporival[2,1] = false;
+                      if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+       
+         }
+       
+       }
+       else if(posicionescartasmagicas[0,1] == true && posicionescartasmagicas[2,1] == true)
+       {
+        posicionescartasmagicas[0,1] = false;
+        posicionescartasmagicas[2,1] = false;
+             if(posicionescartasmagicasrival[0,1] == true)
+         {
+             posicionescartasmagicasrival[0,1] = false;
+             if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+       
+         }
+         else if(posicionescartasmagicasrival[1,1] == true)
+         {
+            posicionescartasmagicasrival[1,1] = false;
+                       if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+  
+         }
+         else if(posicionescartasmagicasrival[2,1] == true)
+         {
+           posicionescamporival[2,1] = false;
+                      if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+       
+         }
+       
+       }
+       else if(posicionescartasmagicas[1,1] == true && posicionescartasmagicas[2,1] == true)
+       {
+         posicionescartasmagicas[1,1] = false;
+         posicionescartasmagicas[2,1] = false;
+              if(posicionescartasmagicasrival[0,1] == true)
+         {
+             posicionescartasmagicasrival[0,1] = false;
+             if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+       
+         }
+         else if(posicionescartasmagicasrival[1,1] == true)
+         {
+            posicionescartasmagicasrival[1,1] = false;
+                       if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+  
+         }
+         else if(posicionescartasmagicasrival[2,1] == true)
+         {
+           posicionescamporival[2,1] = false;
+                      if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+       
+         }
+       
+       }
+     
      }
-     else 
+     else if(cartaTransform5 != null && cartaTransform6 != null)
      {
+      GameObject cartaaeliminate = cartaTransform6.gameObject;
+        Cementary.Add(cartaaeliminate);
+        cartaTransform6.position = new Vector3(200f,200f,200f);
+        cartaaeliminate.transform.SetParent(null);
+        GameObject cartaaeliminate2 = cartaTransform5.gameObject;
+        Cementary.Add(cartaaeliminate2);
+        cartaTransform5.position = new Vector3(200f,200f,200f);
+        cartaaeliminate2.transform.SetParent(null);
+            //Principio
+       if(ActiveEfects[1,0] == true)
+       {
+           int asediooocard = 0;
+        int cuerpoacuerpocard = 0;
+        int distanciacard = 0; 
+        ActiveEfects[2,0] = false;
+      for(int i = 0 ; i < 3 ; i++)
+    {
+      if(posicionescampo[2,i] == true)
+      {
+         asediooocard++;
+      }
+    }
+     for(int i = 0 ; i < 3 ; i++)
+    {
+      if(posicionescampo[0,i] == true)
+      {
+         cuerpoacuerpocard++;
+      }
+    }
+    for(int i = 0 ; i < 3 ; i++)
+    {
+      if(posicionescampo[1,i] == true)
+      {
+         distanciacard++;
+      }
+    }
+    Contador += (asediooocard * 500);
+    Contador += (cuerpoacuerpocard * 500);
+    Contador -= (distanciacard * 300);
+       }
+          //Gimnasio
+         if(ActiveEfects[0,0] == true)
+         {
+          int asediooocard = 0;
+        int cuerpoacuerpocard = 0;
+        int distanciacard = 0; 
+        ActiveEfects[2,0] = false;
+      for(int i = 0 ; i < 3 ; i++)
+    {
+      if(posicionescampo[2,i] == true)
+      {
+         asediooocard++;
+      }
+    }
+     for(int i = 0 ; i < 3 ; i++)
+    {
+      if(posicionescampo[0,i] == true)
+      {
+         cuerpoacuerpocard++;
+      }
+    }
+    for(int i = 0 ; i < 3 ; i++)
+    {
+      if(posicionescampo[1,i] == true)
+      {
+         distanciacard++;
+      }
+    }
+    Contador += (asediooocard * 200);
+    Contador -= (cuerpoacuerpocard *400);
+    Contador += (distanciacard * 200);
+         }
 
+              if(posicionescartasmagicas[0,1] == true && posicionescartasmagicas[1,1] == true)
+       {
+        posicionescartasmagicas[0,1] = false;
+        posicionescartasmagicas[1,1] = false; 
+         if(posicionescartasmagicasrival[0,1] == true)
+         {
+             posicionescartasmagicasrival[0,1] = false;
+             if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+       
+         }
+         else if(posicionescartasmagicasrival[1,1] == true)
+         {
+            posicionescartasmagicasrival[1,1] = false;
+                       if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+  
+         }
+         else if(posicionescartasmagicasrival[2,1] == true)
+         {
+           posicionescamporival[2,1] = false;
+                      if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+       
+         }
+       
+       }
+       else if(posicionescartasmagicas[0,1] == true && posicionescartasmagicas[2,1] == true)
+       {
+        posicionescartasmagicas[0,1] = false;
+        posicionescartasmagicas[2,1] = false;
+             if(posicionescartasmagicasrival[0,1] == true)
+         {
+             posicionescartasmagicasrival[0,1] = false;
+             if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+       
+         }
+         else if(posicionescartasmagicasrival[1,1] == true)
+         {
+            posicionescartasmagicasrival[1,1] = false;
+                       if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+  
+         }
+         else if(posicionescartasmagicasrival[2,1] == true)
+         {
+           posicionescamporival[2,1] = false;
+                      if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+       
+         }
+       
+       }
+       else if(posicionescartasmagicas[1,1] == true && posicionescartasmagicas[2,1] == true)
+       {
+         posicionescartasmagicas[1,1] = false;
+         posicionescartasmagicas[2,1] = false;
+              if(posicionescartasmagicasrival[0,1] == true)
+         {
+             posicionescartasmagicasrival[0,1] = false;
+             if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+       
+         }
+         else if(posicionescartasmagicasrival[1,1] == true)
+         {
+            posicionescartasmagicasrival[1,1] = false;
+                       if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+  
+         }
+         else if(posicionescartasmagicasrival[2,1] == true)
+         {
+           posicionescamporival[2,1] = false;
+                      if(cartaTransform != null)
+             {
+               GameObject cartaaeliminar = cartaTransform.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+       if(ActiveEfectsRival[1,0] == true)
+         {
+            ActiveEfectsRival[1,0] = false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival-= (contador1 * 600);
+        ContadorRival+= (contador2 * 400);
+        ContadorRival+= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform2 != null)
+             {
+         GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        if(ActiveEfectsRival[2,0] == true)
+         {
+            ActiveEfectsRival[2,0] =false;
+             int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 200);
+        ContadorRival+= (contador2 * 200);
+        ContadorRival-= (contador3 * 400);
+         }
+             }
+             else if(cartaTransform3 != null)
+             {
+                 GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+         if(ActiveEfectsRival[0,0] == true)
+             {
+               ActiveEfectsRival[0,0] = false;
+                int contador1 = 0;
+       int contador2 = 0;
+       int contador3 = 0;
+        for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[1,i] == true)
+         {
+            contador1++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[0,i] == true)
+         {
+            contador2++;
+         }
+        }
+          for(int i = 0 ; i < 3 ; i++)
+        {
+         if(posicionescamporival[2,i] == true)
+         {
+            contador3++;
+         }
+        }
+        ContadorRival+= (contador1 * 700);
+        ContadorRival-= (contador2 * 500);
+        ContadorRival+= (contador3 * 700);
+             }
+             }
+       
+         }
+       
+       }
+     
      }
 
 
+     }
    }
    else
    {
@@ -1990,8 +5835,75 @@ else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Caballero")
 }
 #endregion
 #region Unidad Rival
+else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Xerneas" && ActiveEfectsRival[0,1] == false)
+{
+  ActiveEfectsRival[0,1] = true;
+  int temp = 0;
+  for(int i = 0 ; i < posicionescampo.GetLength(0) ; i++)
+  {
+    for(int j = 0 ; j< posicionescampo.GetLength(1) ; j++)
+    {
+       if(posicionescampo[i,j] == true)
+       {
+       temp++;
+       }
+    }
+  }
+  for(int i = 0 ; i < posicionescartasmagicas.GetLength(0) ; i++)
+  {
+    for(int j = 0 ; j < posicionescartasmagicas.GetLength(1) ; j++)
+    {
+      if(posicionescartasmagicas[i,j] == true)
+      {
+        temp++;
+      }
+    }
+  }
+  ContadorRival+= (temp * 100);
+}
 #endregion
 #region  Silver Rival
+else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Rayquaza" && ActiveEfectsRival[2,1] == false)
+{
+  ActiveEfectsRival[2,1] = true;
+  int temp1 = 0;
+  int temp2 = 0;
+  for(int i = 0 ; i < 3 ; i++)
+  {
+    if(posicionescampo[2,i] == true)
+    {
+      temp1++;
+    }
+  }
+  for(int i = 0 ; i < 3 ; i++)
+  {
+    if(posicionescamporival[2,i] == true)
+    {
+      temp2++;
+    }
+  }
+  Contador += (temp1 * 100);
+  ContadorRival += (temp2 * 100);
+
+}
+else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Hoopa" && ActiveEfectsRival[0,2] == false)
+{
+  ActiveEfectsRival[0,2] = true;
+  string nombrelider = "LiderL(Clone)";
+GameObject gameObject =   Cementary.Find(objecto => objecto.name == nombrelider);
+Debug.Log(gameObject);
+if(gameObject != null)
+{
+ GameObject posx = GameObject.Find("CartaLider2");
+    Vector3 posy = posx.transform.position;
+    gameObject.transform.position = new Vector3(posy.x , posy.y , 2f);
+    LeaderRivalPos = true;
+}
+else
+{
+  Debug.Log("No se encontro a la carta lider en el cementerio"); 
+}
+}
 #endregion
 #region Gold Rival
 #endregion
@@ -2015,7 +5927,11 @@ public static void ReiniciarPuntajeRival(int puntaje)
 }
 #endregion
 
+
 #region Vaciar Campo
+///<summary>
+///Este metodo se utiliza para ubicar en el cementerio despues de cada ronda todas las cartas sobre el campo
+///</summary>
 public static void VaciarCampo()
 {
    ActiveEfects = new bool[3,5];
@@ -2420,6 +6336,7 @@ public static void VaciarCampo()
 #endregion
 
 
+
    void Update()
    {
      
@@ -2435,6 +6352,91 @@ public static void VaciarCampo()
      
    }  
 
-
+  public static int PositionMano()
+  {
+    if(objectoInvocado.transform.position.x == -4f)
+    {
+     return 0;
+    }
+    else if(objectoInvocado.transform.position.x == -3f)
+    {
+     return 1;
+    }
+    else if(objectoInvocado.transform.position.x == -2f)
+    {
+      return 2;
+    }
+    else if(objectoInvocado.transform.position.x == -1f)
+    {
+      return 3;
+    }
+      else if(objectoInvocado.transform.position.x == 0f)
+    {
+      return 4;
+    }
+      else if(objectoInvocado.transform.position.x == 1f)
+    {
+      return 5;
+    }
+      else if(objectoInvocado.transform.position.x == 2f)
+    {
+      return 6;
+    }
+      else if(objectoInvocado.transform.position.x == 3f)
+    {
+      return 7;
+    }
+      else if(objectoInvocado.transform.position.x == 4f)
+    {
+      return 8;
+    }
+    else 
+    {
+      return 9;
+    }
+  }
+  public static int PosicionRivalMano()
+  {
+    if(objectoInvocado.transform.position.x == 3.624875f)
+    {
+         return 0;
+    }
+    else if(objectoInvocado.transform.position.x == -0.05461908f)
+    {
+       return 1;
+    }
+     else if(objectoInvocado.transform.position.x == -0.03380742)
+    {
+       return 2;
+    }
+     else if(objectoInvocado.transform.position.x == -0.01299577f)
+    {
+       return 3;
+    }
+     else if(objectoInvocado.transform.position.x == 0.004403976f)
+    {
+       return 4;
+    }
+     else if(objectoInvocado.transform.position.x == 0.02862754)
+    {
+       return 5;
+    }
+      else if(objectoInvocado.transform.position.x == 0.0494392f)
+    {
+       return 6;
+    }
+      else if(objectoInvocado.transform.position.x == 0.07025085f)
+    {
+       return 7;
+    }
+      else if(objectoInvocado.transform.position.x == 0.0910625f)
+    {
+       return 8;
+    }
+    else
+    {
+      return 9;
+    }
+  }
 
 }

@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class BotonesSettings : MonoBehaviour
 {
   
 public GameObject mainCameraa;
-private  int Turnos;
+public static int Turnos;
 public static int Rondas;
 public static int RondasRival;
 public Text Turnosstring;
@@ -17,12 +18,16 @@ public Text ContadoresRival;
 //Regresar
 private GameObject panel;
 private bool Condition;
-
+//Rondas
+public Text RondasFisico;
+public Text RondasRivalFisico;
+public Button buttonBarajear;
+public Button buttonBarajearRival;
 
 void Start()
 {
     
-    Rondas = 1;
+    Rondas = 0;
     Turnos = 1;
 }
 
@@ -36,6 +41,9 @@ public void Activar()
         ContadoresRival.transform.rotation =  Quaternion.Euler(0,0,0);
         mainCameraa.transform.rotation = Quaternion.Euler(180,180,0);
         Condition = true;
+        CardUnidad.Invocaste = false;
+        buttonBarajear.transform.localScale = Vector3.zero;
+        buttonBarajearRival.transform.localScale = new Vector3(1f,1f,1f);
     }
     else
     {
@@ -45,6 +53,9 @@ public void Activar()
         Contador.transform.rotation =  Quaternion.Euler(0,0,0);
         mainCameraa.transform.rotation = Quaternion.Euler(0,0,0);
         Condition = false;
+        CardUnidad.Invocaste = false;
+        buttonBarajear.transform.localScale = new Vector3(1f,1f,1f);
+         buttonBarajearRival.transform.localScale = Vector3.zero;
     }
 }
 
@@ -58,7 +69,7 @@ public void Regresar()
 }
 public void GanadorRonda()
 {
-  if(Turnos % 2 == 0)
+  if(Turnos % 2 == 0 && Turnos > 5)
   {
     
     int contador = CardUnidad.Contador;
@@ -66,32 +77,40 @@ public void GanadorRonda()
     if(contador > ContadorRival)
     {
        Rondas++;
-       if(Rondas == 3)
+       if(Rondas == 2)
        {
         Debug.Log("El ganador ha sido el equipo de Red");
+        SceneManager.LoadScene("GanadorRed");
        }
        mainCameraa.transform.rotation = Quaternion.Euler(0,0,0);
+        buttonBarajear.transform.localScale = new Vector3(1f,1f,1f);
+         buttonBarajearRival.transform.localScale = Vector3.zero;
         Turnos = 1;
         CardUnidad.ReiniciarPuntaje(0);
         CardUnidad.ReiniciarPuntajeRival(0);
         Condition = false;
         CardUnidad.VaciarCampo();
+        CardUnidad.Invocaste = false;
     }
     else if(contador == ContadorRival)
     {
         if(CardUnidad.LeaderRivalEfect == true)
        {
         RondasRival++;
-      if(RondasRival == 3)
+      if(RondasRival == 2)
       {
         Debug.Log("El ganador ha sido el equipo de los legendarios");
+        SceneManager.LoadScene("GanadorL");
       }
       mainCameraa.transform.rotation = Quaternion.Euler(180,180,0);
+       buttonBarajear.transform.localScale = Vector3.zero;
+        buttonBarajearRival.transform.localScale = new Vector3(1f,1f,1f);
        Turnos = 1;
        CardUnidad.ReiniciarPuntaje(0);
        CardUnidad.ReiniciarPuntajeRival(0);
        Condition = true;
        CardUnidad.VaciarCampo();
+       CardUnidad.Invocaste = false;
        }
        
       Debug.Log("Sigan jugando");
@@ -99,16 +118,20 @@ public void GanadorRonda()
     else
     {
       RondasRival++;
-      if(RondasRival == 3)
+      if(RondasRival == 2)
       {
         Debug.Log("El ganador ha sido el equipo de los legendarios");
+         SceneManager.LoadScene("GanadorL");
       }
       mainCameraa.transform.rotation = Quaternion.Euler(180,180,0);
+       buttonBarajear.transform.localScale = Vector3.zero;
+        buttonBarajearRival.transform.localScale = new Vector3(1f,1f,1f);
        Turnos = 1;
        CardUnidad.ReiniciarPuntaje(0);
        CardUnidad.ReiniciarPuntajeRival(0);
        Condition = true;
        CardUnidad.VaciarCampo();
+       CardUnidad.Invocaste = false;
     }
   } 
   else
@@ -123,6 +146,15 @@ void Update()
   if(Turnosstring != null)
   {
     Turnosstring.text = Turnos.ToString();
+  }
+  if(RondasRivalFisico != null)
+  {
+     
+      RondasRivalFisico.text = "Legendarios :" + RondasRival.ToString(); 
+  }
+  if(RondasFisico != null)
+  {
+    RondasFisico.text = "Red" + Rondas.ToString();
   }
 }
 
