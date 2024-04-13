@@ -24,8 +24,8 @@ private GameObject spriteGigante;
  private static bool LeaderPos;
  private static bool LeaderRivalPos;
  //Mascara Boleeanas para verificar activacion del efecto
- private static bool [,] ActiveEfects;
- private static bool [,] ActiveEfectsRival;
+ public static bool [,] ActiveEfects;
+ public static bool [,] ActiveEfectsRival;
  public static bool LeaderRivalEfect;
 
 //Cartas clima
@@ -1378,90 +1378,76 @@ else if(objectoInvocado.tag == "Silver1")
 #region Senuelo Rival
 else if(objectoInvocado.tag == "Senuelo1")
 {
-  if(posicionescamporival[2,0] == false)
+      if(posicionescampo[2,0] == false)
          {
-          InvocadasRival.Add(PosicionRivalMano());
-            GameObject posx = GameObject.Find("Asedio2Espacio1");
+            GameObject posx = GameObject.Find("Asedio1Espacio1");
             Vector3 posy = posx.transform.position;
-            objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
-            posicionescamporival[2,0] = true;
-            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
-            
-         }
-         else if(posicionescamporival[2,1] == false)
-         {
-          InvocadasRival.Add(PosicionRivalMano());
-           GameObject posx = GameObject.Find("Asedio2Espacio2");
-            Vector3 posy = posx.transform.position;
-            objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
-            posicionescamporival[2,1] = true;
-            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
-            
-         }
-         else if(posicionescamporival[2,2] == false)
-         {
-          InvocadasRival.Add(PosicionRivalMano());
-            GameObject posx = GameObject.Find("Asedio2Espacio3");
-            Vector3 posy = posx.transform.position;
-            objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
-            posicionescamporival[2,2] = true;
-            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
-            
-         }
-       else  if(posicionescamporival[1,0] == false)
-         {
-          InvocadasRival.Add(PosicionRivalMano());
-            GameObject posx = GameObject.Find("Distancia2Espacio1");
-            Vector3 posy = posx.transform.position;
-            objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
-            posicionescamporival[1,0] = true;
-            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
-            
-         }
-         else if(posicionescamporival[1,1] == false)
-         {
+            objectoInvocado.transform.position = new Vector3(posy.x , posy.y  , 2f);
+            posicionescampo[2,0] = true;
            InvocadasRival.Add(PosicionRivalMano());
-            GameObject posx = GameObject.Find("Distancia2Espacio2");
-            Vector3 posy = posx.transform.position;
-            objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
-            posicionescamporival[1,1] = true;
-            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
-           
          }
-         else if(posicionescamporival[1,2] == false)
+         else if(posicionescampo[2,1] == false)
          {
-            GameObject posx = GameObject.Find("Distancia2Espacio3");
+           GameObject posx = GameObject.Find("Asedio1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
-            posicionescamporival[1,2] = true;
-            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            InvocadasRival.Add(PosicionRivalMano());
+            posicionescampo[2,1] = true;
+         }
+         else if(posicionescampo[2,2] == false)
+         {
+            GameObject posx = GameObject.Find("Asedio1Espacio3");
+            Vector3 posy = posx.transform.position;
+            objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+           InvocadasRival.Add(PosicionRivalMano());
+            posicionescampo[2,2] = true;
+         }
+         else if(posicionescampo[1,0] == false)
+         {
+            GameObject posx = GameObject.Find("Distancia1Espacio1");
+            Vector3 posy = posx.transform.position;
+            objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+            posicionescampo[1,0] = true;
             InvocadasRival.Add(PosicionRivalMano());
          }
-         else if(posicionescamporival[0,0] == false)
+         else if(posicionescampo[1,1] == false)
          {
-             GameObject posx = GameObject.Find("Cuerpo2Espacio3");
+            GameObject posx = GameObject.Find("Distancia1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
-            posicionescamporival[0,0] = true;
-            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            posicionescampo[1,1] = true;
+           InvocadasRival.Add(PosicionRivalMano());
+         }
+         else if(posicionescampo[1,2] == false)
+         {
+            GameObject posx = GameObject.Find("Distancia1Espacio3");
+            Vector3 posy = posx.transform.position;
+            objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+            posicionescampo[1,2] = true;
             InvocadasRival.Add(PosicionRivalMano());
          }
-         else if(posicionescamporival[0,1] == false)
+          if(posicionescampo[0,0] == false)
          {
-           GameObject posx = GameObject.Find("Cuerpo2Espacio1");
+             GameObject posx = GameObject.Find("Cuerpo1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
-            posicionescamporival[0,1] = true; 
-            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            posicionescampo[0,0] = true;
             InvocadasRival.Add(PosicionRivalMano());
          }
-         else if(posicionescamporival[0,2] == false)
+         else if(posicionescampo[0,1] == false)
          {
-            GameObject posx = GameObject.Find("Cuerpo2Espacio2");
+           GameObject posx = GameObject.Find("Cuerpo1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
-            posicionescamporival[0,2] = true;
-            ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
+            posicionescampo[0,1] = true; 
+            InvocadasRival.Add(PosicionRivalMano());
+         }
+         else if(posicionescampo[0,2] == false)
+         {
+            GameObject posx = GameObject.Find("Cuerpo1Espacio2");
+            Vector3 posy = posx.transform.position;
+            objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
+            posicionescampo[0,2] = true;
             InvocadasRival.Add(PosicionRivalMano());
          }
          else
@@ -1754,7 +1740,10 @@ else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Amistad" ||objectoIn
         ContadorRival+= (contador2 * 400);
         ContadorRival+= (contador3 * 400);
          }
-      
+          if(ActiveEfectsRival[1,1] == true)
+        {
+         ContadorRival += 100;
+        }
       }
       else if(cartaTransform2 != null)
       {
@@ -1794,7 +1783,10 @@ else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Amistad" ||objectoIn
         ContadorRival+= (contador2 * 200);
         ContadorRival-= (contador3 * 400);
          }
-     
+         if(ActiveEfectsRival[1,1] == true)
+        {
+         ContadorRival += 100;
+        }
       }
       else if(cartaTransform3 != null)
       {
@@ -1834,7 +1826,10 @@ else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Amistad" ||objectoIn
         ContadorRival-= (contador2 * 500);
         ContadorRival+= (contador3 * 700);
              }
-        
+        if(ActiveEfectsRival[1,1] == true)
+        {
+         ContadorRival += 100;
+        }
       }
       else
       {
@@ -1888,6 +1883,10 @@ GameObject canvass = GameObject.Find("Tablero");
         ContadorRival+= (contador2 * 400);
         ContadorRival+= (contador3 * 400);
          }
+           if(ActiveEfectsRival[1,1] == true)
+        {
+         ContadorRival += 100;
+        }
       }
       else if(cartaTransform2 != null)
       {
@@ -1927,6 +1926,10 @@ GameObject canvass = GameObject.Find("Tablero");
         ContadorRival+= (contador2 * 200);
         ContadorRival-= (contador3 * 400);
          }
+           if(ActiveEfectsRival[1,1] == true)
+        {
+         ContadorRival += 100;
+        }
       }
       else if(cartaTransform3 != null)
       {
@@ -1966,6 +1969,10 @@ GameObject canvass = GameObject.Find("Tablero");
         ContadorRival-= (contador2 * 500);
         ContadorRival+= (contador3 * 700);
              }
+               if(ActiveEfectsRival[1,1] == true)
+        {
+         ContadorRival += 100;
+        }
       }
       else
       {
@@ -2019,6 +2026,10 @@ GameObject canvass = GameObject.Find("Tablero");
         ContadorRival+= (contador2 * 400);
         ContadorRival+= (contador3 * 400);
          }
+           if(ActiveEfectsRival[1,1] == true)
+        {
+         ContadorRival += 100;
+        }
       }
       else if(cartaTransform2 != null)
       {
@@ -2058,6 +2069,10 @@ GameObject canvass = GameObject.Find("Tablero");
         ContadorRival+= (contador2 * 200);
         ContadorRival-= (contador3 * 400);
          }
+           if(ActiveEfectsRival[1,1] == true)
+        {
+         ContadorRival += 100;
+        }
       }
       else if(cartaTransform3 != null)
       {
@@ -2097,6 +2112,10 @@ GameObject canvass = GameObject.Find("Tablero");
         ContadorRival-= (contador2 * 500);
         ContadorRival+= (contador3 * 700);
              }
+               if(ActiveEfectsRival[1,1] == true)
+        {
+         ContadorRival += 100;
+        }
       }
       else
       {
@@ -2147,9 +2166,28 @@ else
   Debug.Log("No se encontro a la carta lider en el cementerio");
 }
 }
+
 #region Silver 
+else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Lucario" && ActiveEfects[1,2] == false)
+{
+  ActiveEfects[1,2] = true;
+  ContadorRival /= 2;
+}
+else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Gengar" && ActiveEfects[2,2] == false)
+{
+  ActiveEfects[2,2] = true;
+  ContadorRival /= 2;
+  Contador /= 2;
+}
+
 #endregion
 #region Gold
+else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Charizard X-Y" && ActiveEfects[0,2] == false)
+{
+  ActiveEfects[0,2] = true;
+  int result = BotonesSettings.Turnos;
+  Contador += (result * 100);
+}
 #endregion
 
 
@@ -5861,6 +5899,12 @@ else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Xerneas" && ActiveEf
   }
   ContadorRival+= (temp * 100);
 }
+else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Darkrai" && ActiveEfectsRival[1,1] == false)
+{
+  ActiveEfectsRival[1,1] = true;
+   int result = Cementary.Count;
+   ContadorRival += (100 * result);
+}
 #endregion
 #region  Silver Rival
 else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Rayquaza" && ActiveEfectsRival[2,1] == false)
@@ -5904,8 +5948,20 @@ else
   Debug.Log("No se encontro a la carta lider en el cementerio"); 
 }
 }
+else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Giratina" && ActiveEfectsRival[2,2] == false)
+{
+ ActiveEfectsRival[2,2] = true;
+ Contador /= 2;
+ ContadorRival /= 2;
+}
 #endregion
 #region Gold Rival
+else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Mewtwo" && ActiveEfectsRival[1,2] == false)
+{
+  ActiveEfectsRival[1,2] = true;
+  int result = BotonesSettings.Turnos;
+  Contador -= (100 * result);
+}
 #endregion
 #region Leader Rival
 else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Arceus" && LeaderRivalEfect == false)

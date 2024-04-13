@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 public class BotonesSettings : MonoBehaviour
 {
   
@@ -29,6 +30,8 @@ void Start()
     
     Rondas = 0;
     Turnos = 1;
+     buttonBarajear.transform.localScale = new Vector3(1f,1f,1f);
+    buttonBarajearRival.transform.localScale = Vector3.zero;
 }
 
 public void Activar()
@@ -44,6 +47,14 @@ public void Activar()
         CardUnidad.Invocaste = false;
         buttonBarajear.transform.localScale = Vector3.zero;
         buttonBarajearRival.transform.localScale = new Vector3(1f,1f,1f);
+        if(CardUnidad.ActiveEfects[0,2] == true)
+        {
+          CardUnidad.Contador += 100;
+        }
+        if(CardUnidad.ActiveEfectsRival[1,2] == true)
+        {
+          CardUnidad.Contador -=100;
+        }
     }
     else
     {

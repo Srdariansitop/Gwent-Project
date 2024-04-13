@@ -80,7 +80,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 14.17, y: 21.260191}
+  m_Size: {x: 15.35, y: 20.08}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -101,6 +101,10 @@ MonoBehaviour:
   Name: Gengar
   Attack: 1100
   Tipo: Silver
+  doubleStat: 0
+  ContadorFisicoP: {fileID: 0}
+  ContadorFisicoR: {fileID: 0}
+  canvasTransform: {fileID: 0}
 --- !u!61 &-3735406532620235912
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -137,8 +141,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 14.17, y: 21.260191}
-    newSize: {x: 14.17, y: 21.260191}
+    oldSize: {x: 15.35, y: 20.08}
+    newSize: {x: 15.35, y: 20.08}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
