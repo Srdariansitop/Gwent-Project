@@ -126,11 +126,11 @@ Debug.Log(objectoInvocado.tag);
 
      if(posicionescampo[2,0] == false)
          {
+            Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Asedio1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y  , 2f);
             posicionescampo[2,0] = true;
-            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
             if(ActiveEfects[1,4] == true)
             {
@@ -159,10 +159,10 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[2,1] == false)
          {
-           GameObject posx = GameObject.Find("Asedio1Espacio2");
+            Invocadas.Add(PositionMano());
+            GameObject posx = GameObject.Find("Asedio1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
-            Invocadas.Add(PositionMano());
             posicionescampo[2,1] = true;
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfects[1,4] == true)
@@ -192,10 +192,10 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[2,2] == false)
          {
+            Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Asedio1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
-            Invocadas.Add(PositionMano());
             posicionescampo[2,2] = true;
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfects[1,4] == true)
@@ -234,11 +234,11 @@ Debug.Log(objectoInvocado.tag);
   {
     if(posicionescampo[1,0] == false)
          {
+            Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Distancia1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,0] = true;
-            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfects[0,4] == true)
             {
@@ -263,11 +263,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[1,1] == false)
          {
+            Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Distancia1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
-            posicionescampo[1,1] = true;
-            Invocadas.Add(PositionMano());
+            posicionescampo[1,1] = true;   
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
               if(ActiveEfects[0,4] == true)
             {
@@ -292,11 +292,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[1,2] == false)
          {
+             Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Distancia1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,2] = true;
-            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
               if(ActiveEfects[0,4] == true)
             {
@@ -330,11 +330,11 @@ Debug.Log(objectoInvocado.tag);
   {
          if(posicionescampo[0,0] == false)
          {
+             Invocadas.Add(PositionMano());
              GameObject posx = GameObject.Find("Cuerpo1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,0] = true;
-            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
               if(ActiveEfects[2,4] == true)
             {
@@ -359,11 +359,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[0,1] == false)
          {
+          Invocadas.Add(PositionMano());
            GameObject posx = GameObject.Find("Cuerpo1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,1] = true; 
-            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
               if(ActiveEfects[2,4] == true)
             {
@@ -388,11 +388,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[0,2] == false)
          {
+            Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Cuerpo1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,2] = true;
-            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
               if(ActiveEfects[2,4] == true)
             {
@@ -426,11 +426,11 @@ Debug.Log(objectoInvocado.tag);
   {
     if(posicionescampo[2,0] == false)
          {
+            Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Asedio1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
-            posicionescampo[2,0] = true;
-            Invocadas.Add(PositionMano());
+            posicionescampo[2,0] = true; 
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -439,11 +439,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[2,1] == false)
          {
+           Invocadas.Add(PositionMano());
            GameObject posx = GameObject.Find("Asedio1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,1] = true;
-            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -452,11 +452,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[2,2] == false)
          {
+            Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Asedio1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,2] = true;
-            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -493,11 +493,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[1,2] == false)
          {
+            Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Distancia1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,2] = true;
-            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -506,11 +506,11 @@ Debug.Log(objectoInvocado.tag);
          }
         else  if(posicionescampo[0,0] == false)
          {
+            Invocadas.Add(PositionMano());
              GameObject posx = GameObject.Find("Cuerpo1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,0] = true;
-            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -519,11 +519,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[0,1] == false)
          {
+           Invocadas.Add(PositionMano());
            GameObject posx = GameObject.Find("Cuerpo1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,1] = true; 
-            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -532,11 +532,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[0,2] == false)
          {
+            Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Cuerpo1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,2] = true;
-            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -555,11 +555,11 @@ Debug.Log(objectoInvocado.tag);
   {
       if(posicionescampo[2,0] == false)
          {
+            Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Asedio1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,0] = true;
-            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -568,11 +568,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[2,1] == false)
          {
+           Invocadas.Add(PositionMano());
            GameObject posx = GameObject.Find("Asedio1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,1] = true;
-            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -581,11 +581,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[2,2] == false)
          {
+            Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Asedio1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[2,2] = true;
-            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -596,11 +596,11 @@ Debug.Log(objectoInvocado.tag);
 
         else  if(posicionescampo[1,0] == false)
          {
+            Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Distancia1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,0] = true;
-            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -609,11 +609,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[1,1] == false)
          {
+            Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Distancia1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,1] = true;
-            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -622,11 +622,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[1,2] == false)
          {
+            Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Distancia1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[1,2] = true;
-            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -635,11 +635,11 @@ Debug.Log(objectoInvocado.tag);
          }
         else  if(posicionescampo[0,0] == false)
          {
+            Invocadas.Add(PositionMano());
              GameObject posx = GameObject.Find("Cuerpo1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,0] = true;
-            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -648,11 +648,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[0,1] == false)
          {
+          Invocadas.Add(PositionMano());
            GameObject posx = GameObject.Find("Cuerpo1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,1] = true; 
-            Invocadas.Add(PositionMano());
              if(ActiveEfectsRival[0,1] == true)
             {
               ContadorRival+= 100;
@@ -660,11 +660,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[0,2] == false)
          {
+            Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Cuerpo1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescampo[0,2] = true;
-            Invocadas.Add(PositionMano());
             Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -683,11 +683,11 @@ Debug.Log(objectoInvocado.tag);
   {
     if(posicionescamporival[2,0] == false)
          {
+           Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Asedio2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,0] = true;
-            Invocadas.Add(PositionMano());
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -696,11 +696,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescamporival[2,1] == false)
          {
+          Invocadas.Add(PositionMano());
            GameObject posx = GameObject.Find("Asedio2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,1] = true;
-            Invocadas.Add(PositionMano());
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -709,11 +709,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescamporival[2,2] == false)
          {
+            Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Asedio2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[2,2] = true;
-            Invocadas.Add(PositionMano());
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -722,11 +722,11 @@ Debug.Log(objectoInvocado.tag);
          }
        else  if(posicionescamporival[1,0] == false)
          {
+           Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Distancia2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,0] = true;
-            Invocadas.Add(PositionMano());
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -735,11 +735,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescamporival[1,1] == false)
          {
+           Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Distancia2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,1] = true;
-            Invocadas.Add(PositionMano());
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -748,11 +748,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescamporival[1,2] == false)
          {
+            Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Distancia2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[1,2] = true;
-            Invocadas.Add(PositionMano());
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -761,11 +761,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescamporival[0,0] == false)
          {
-             GameObject posx = GameObject.Find("Cuerpo2Espacio3");
+            Invocadas.Add(PositionMano());
+            GameObject posx = GameObject.Find("Cuerpo2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,0] = true;
-            Invocadas.Add(PositionMano());
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -774,11 +774,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescamporival[0,1] == false)
          {
+          Invocadas.Add(PositionMano());
            GameObject posx = GameObject.Find("Cuerpo2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,1] = true; 
-            Invocadas.Add(PositionMano());
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -787,11 +787,11 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescamporival[0,2] == false)
          {
+           Invocadas.Add(PositionMano());
             GameObject posx = GameObject.Find("Cuerpo2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
             posicionescamporival[0,2] = true;
-            Invocadas.Add(PositionMano());
             ContadorRival += objectoInvocado.GetComponent<CardUnidad>().Attack;
              if(ActiveEfectsRival[0,1] == true)
             {
@@ -807,11 +807,11 @@ Debug.Log(objectoInvocado.tag);
  #region Lider
 else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
 {
+  Invocadas.Add(PositionMano());
    GameObject posx = GameObject.Find("CartaLider1");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     LeaderPos = true;
-    Invocadas.Add(PositionMano());
     Contador += objectoInvocado.GetComponent<CardUnidad>().Attack;
      if(ActiveEfectsRival[0,1] == true)
             {
@@ -822,11 +822,11 @@ else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
  #region Aumento
   else if(objectoInvocado.tag == "AumentoR")
  {
-     GameObject posx = GameObject.Find("AumentoDistancia1");
+    Invocadas.Add(PositionMano());
+    GameObject posx = GameObject.Find("AumentoDistancia1");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     posicionescartasmagicas[0,0] = true;
-    Invocadas.Add(PositionMano());
      if(ActiveEfectsRival[0,1] == true)
             {
               ContadorRival+= 100;
@@ -835,11 +835,11 @@ else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
  }
  else if(objectoInvocado.tag == "AumentoRA")
  {
+  Invocadas.Add(PositionMano());
   GameObject posx = GameObject.Find("AumentoAsedio1");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     posicionescartasmagicas[1,0] = true;
-    Invocadas.Add(PositionMano());
      if(ActiveEfectsRival[0,1] == true)
             {
               ContadorRival+= 100;
@@ -847,11 +847,11 @@ else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
  }
  else if(objectoInvocado.tag == "AumentoRC")
  {
+  Invocadas.Add(PositionMano());
   GameObject posx = GameObject.Find("AumentoCuerpo1");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     posicionescartasmagicas[2,0] = true;
-    Invocadas.Add(PositionMano());
      if(ActiveEfectsRival[0,1] == true)
             {
               ContadorRival+= 100;
@@ -863,11 +863,11 @@ else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
  {
    if(posicionescartasmagicas[0,1] == false)
    {
+    Invocadas.Add(PositionMano());
      GameObject posx = GameObject.Find("Clima1");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     posicionescartasmagicas[0,1] = true;
-    Invocadas.Add(PositionMano());
      if(ActiveEfectsRival[0,1] == true)
             {
               ContadorRival+= 100;
@@ -875,11 +875,11 @@ else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
    }
    else if(posicionescartasmagicas[1,1] == false)
    {
+    Invocadas.Add(PositionMano());
        GameObject posx = GameObject.Find("Clima2");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     posicionescartasmagicas[1,1] = true;
-    Invocadas.Add(PositionMano());
      if(ActiveEfectsRival[0,1] == true)
             {
               ContadorRival+= 100;
@@ -887,11 +887,11 @@ else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
    }
    else if(posicionescartasmagicas[2,1] == false)
    {
-      GameObject posx = GameObject.Find("Clima3");
+    Invocadas.Add(PositionMano());
+    GameObject posx = GameObject.Find("Clima3");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     posicionescartasmagicas[2,1] = true;
-    Invocadas.Add(PositionMano());
      if(ActiveEfectsRival[0,1] == true)
             {
               ContadorRival+= 100;
@@ -6414,7 +6414,7 @@ public static void VaciarCampo()
     {
      return 0;
     }
-    else if(objectoInvocado.transform.position.x == -3f)
+    else if(Mathf.Approximately(objectoInvocado.transform.position.x, -3f))
     {
      return 1;
     }
@@ -6457,35 +6457,35 @@ public static void VaciarCampo()
     {
          return 0;
     }
-    else if(objectoInvocado.transform.position.x == -0.05461908f)
+    else if(objectoInvocado.transform.position.x == 2.624875f)
     {
        return 1;
     }
-     else if(objectoInvocado.transform.position.x == -0.03380742)
+     else if(Mathf.Approximately(objectoInvocado.transform.position.x, 1.624875f)) 
     {
-       return 2;
+       return 2; 
     }
-     else if(objectoInvocado.transform.position.x == -0.01299577f)
+     else if(Mathf.Approximately(objectoInvocado.transform.position.x, 0.6248751f) )
     {
        return 3;
     }
-     else if(objectoInvocado.transform.position.x == 0.004403976f)
+     else if(Mathf.Approximately(objectoInvocado.transform.position.x, -0.3751249f))
     {
        return 4;
     }
-     else if(objectoInvocado.transform.position.x == 0.02862754)
+     else if(Mathf.Approximately(objectoInvocado.transform.position.x, -1.375125f))
     {
        return 5;
     }
-      else if(objectoInvocado.transform.position.x == 0.0494392f)
+      else if(Mathf.Approximately(objectoInvocado.transform.position.x, -2.375125f))
     {
        return 6;
     }
-      else if(objectoInvocado.transform.position.x == 0.07025085f)
+      else if(Mathf.Approximately(objectoInvocado.transform.position.x, -3.375125f))
     {
        return 7;
     }
-      else if(objectoInvocado.transform.position.x == 0.0910625f)
+      else if(Mathf.Approximately(objectoInvocado.transform.position.x, -4.375125f) )
     {
        return 8;
     }

@@ -9,6 +9,8 @@ public  List<GameObject> deck = new List<GameObject>();
 public  List<GameObject> hand = new List<GameObject>();
 private int cantidad = 1;
 private int cantidadRival = 1;
+private int cantidadRobar = 0;
+private int cantidadRivalRobar = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -123,38 +125,88 @@ private int cantidadRival = 1;
     #region Robar Dos Cartas
     public void Robar()
     {
-       if(CardUnidad.Invocadas.Count >= 2) 
-       {
-        int carta1 = CardUnidad.Invocadas[0];
-        int carta2 = CardUnidad.Invocadas[1];
-        hand.RemoveAt(carta1);
-        hand.RemoveAt(carta2);
-        //Primera Carta
+      if(cantidadRobar == 0)
+      {
+        if(CardUnidad.Invocadas.Count >= 2)
+      {
+        cantidadRobar++;
+       int carta1 = CardUnidad.Invocadas[0];
+       int carta2 = CardUnidad.Invocadas[1];
+       hand.RemoveAt(carta1);
+       hand.RemoveAt(carta2);
+        for(int i = 0 ; i < 2 ;i++)
+    {
         GameObject temp = deck[Random.Range(0,deck.Count)];
         hand.Add(temp);
         deck.Remove(temp);
-        //Segunda Carta
-        GameObject temp2 = deck[Random.Range(0,deck.Count)];
-        hand.Add(temp2);
-        deck.Remove(temp2);
-         Transform handposi = transform.Find("HandPosition");
-        GameObject card = hand[hand.Count -1];
-        Transform pos = handposi.GetChild(carta1);
+    }
+    EliminarInstancias();
+    Transform handposi = transform.Find("HandPosition");
+    //Mostrar tablero
+    for(int i = 0 ; i < hand.Count ; i++)
+    {
+        GameObject card = hand[i];
+        Transform pos = handposi.GetChild(i);
         GameObject nuevainstancia = Instantiate(card,pos.position,Quaternion.identity);
         Debug.Log(card);
         Debug.Log(nuevainstancia);
         float scale = 0.02590f;
-        nuevainstancia.transform.localScale = new Vector3(scale,scale,scale);  
-        //Carta2
-        GameObject card2 = hand[hand.Count -2];
-        Transform pos2 = handposi.GetChild(carta2);
-        GameObject nuevainstancia2 = Instantiate(card2,pos2.position,Quaternion.identity);
-        Debug.Log(card2);
-        Debug.Log(nuevainstancia2);
-        nuevainstancia2.transform.localScale = new Vector3(scale,scale,scale);  
-       }
-       
+        nuevainstancia.transform.localScale = new Vector3(scale,scale,scale);       
+    }  
+      }
+      else
+      {
+         Debug.Log("No hay espacio en la mano");
+      }
+      }
+      else 
+      {
+        Debug.Log("Solo se puede robar dos cartas , una sola vez");
+      }
+     
+    }
 
+     public void RobarRival()
+    {
+      if(cantidadRivalRobar == 0)
+      {
+       if(CardUnidad.InvocadasRival.Count >= 2)
+      {
+        cantidadRivalRobar++;
+       int carta1 = CardUnidad.InvocadasRival[0];
+       int carta2 = CardUnidad.InvocadasRival[1];
+       hand.RemoveAt(carta1);
+       hand.RemoveAt(carta2);
+        for(int i = 0 ; i < 2 ;i++)
+    {
+        GameObject temp = deck[Random.Range(0,deck.Count)];
+        hand.Add(temp);
+        deck.Remove(temp);
+    }
+    EliminarInstanciasRival();
+    Transform handposi = transform.Find("HandPosition");
+    //Mostrar tablero
+    for(int i = 0 ; i < hand.Count ; i++)
+    {
+        GameObject card = hand[i];
+        Transform pos = handposi.GetChild(i);
+        GameObject nuevainstancia = Instantiate(card,pos.position,Quaternion.identity);
+        Debug.Log(card);
+        Debug.Log(nuevainstancia);
+        float scale = 0.02590f;
+        nuevainstancia.transform.localScale = new Vector3(scale,scale,scale);       
+    }  
+      }
+      else
+      {
+         Debug.Log("No hay espacio en la mano");
+      }
+      }
+     else 
+     {
+      Debug.Log("Solo se puede robar dos cartas , una sola vez");
+     }
+     
     }
     #endregion
     

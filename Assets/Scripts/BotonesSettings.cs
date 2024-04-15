@@ -12,7 +12,7 @@ public GameObject mainCameraa;
 public static int Turnos;
 public static int Rondas;
 public static int RondasRival;
-public Text Turnosstring;
+public TextMeshProUGUI Turnosstring;
 //Contadores
 public Text Contador;
 public Text ContadoresRival;
@@ -24,14 +24,18 @@ public Text RondasFisico;
 public Text RondasRivalFisico;
 public Button buttonBarajear;
 public Button buttonBarajearRival;
+public Button buttonRobarRival;
+public Button buttonRobar;
 
 void Start()
 {
     
     Rondas = 0;
     Turnos = 1;
-     buttonBarajear.transform.localScale = new Vector3(1f,1f,1f);
+    buttonBarajear.transform.localScale = new Vector3(1f,1f,1f);
     buttonBarajearRival.transform.localScale = Vector3.zero;
+    buttonRobar.transform.localScale = Vector3.zero;
+    buttonRobarRival.transform.localScale = Vector3.zero;
 }
 
 public void Activar()
@@ -55,6 +59,11 @@ public void Activar()
         {
           CardUnidad.Contador -=100;
         }
+        if(Rondas == 1 && RondasRival == 1)
+        {
+          buttonRobar.transform.localScale = Vector3.zero;
+          buttonRobarRival.transform.localScale = new Vector3(1f,1f,1f);
+        }
     }
     else
     {
@@ -67,6 +76,19 @@ public void Activar()
         CardUnidad.Invocaste = false;
         buttonBarajear.transform.localScale = new Vector3(1f,1f,1f);
          buttonBarajearRival.transform.localScale = Vector3.zero;
+           if(CardUnidad.ActiveEfects[0,2] == true)
+        {
+          CardUnidad.Contador += 100;
+        }
+        if(CardUnidad.ActiveEfectsRival[1,2] == true)
+        {
+          CardUnidad.Contador -=100;
+        }
+         if(Rondas == 1 && RondasRival == 1)
+        {
+          buttonRobar.transform.localScale =  new Vector3(1f,1f,1f);
+          buttonRobarRival.transform.localScale = Vector3.zero;
+        }
     }
 }
 
@@ -102,6 +124,12 @@ public void GanadorRonda()
         Condition = false;
         CardUnidad.VaciarCampo();
         CardUnidad.Invocaste = false;
+        buttonBarajear.transform.localScale = Vector3.zero;
+        buttonBarajearRival.transform.localScale = Vector3.zero;
+        if(Rondas == RondasRival)
+        {
+          buttonRobar.transform.localScale = new Vector3(1f,1f,1f);
+        }
     }
     else if(contador == ContadorRival)
     {
@@ -122,6 +150,12 @@ public void GanadorRonda()
        Condition = true;
        CardUnidad.VaciarCampo();
        CardUnidad.Invocaste = false;
+        buttonBarajear.transform.localScale = Vector3.zero;
+        buttonBarajearRival.transform.localScale = Vector3.zero;
+        if(Rondas == RondasRival)
+        {
+           buttonRobarRival.transform.localScale = new Vector3(1f,1f,1f);
+        }
        }
        
       Debug.Log("Sigan jugando");
@@ -143,6 +177,12 @@ public void GanadorRonda()
        Condition = true;
        CardUnidad.VaciarCampo();
        CardUnidad.Invocaste = false;
+        buttonBarajear.transform.localScale = Vector3.zero;
+        buttonBarajearRival.transform.localScale = Vector3.zero;
+        if(Rondas == RondasRival)
+        {
+           buttonRobarRival.transform.localScale = new Vector3(1f,1f,1f);
+        }
     }
   } 
   else
@@ -165,7 +205,7 @@ void Update()
   }
   if(RondasFisico != null)
   {
-    RondasFisico.text = "Red" + Rondas.ToString();
+    RondasFisico.text = "Red :" + Rondas.ToString();
   }
 }
 
