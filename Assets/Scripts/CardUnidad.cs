@@ -48,6 +48,10 @@ public static bool Invocaste;
 //Posiciones Invocadas
 public static List<int> Invocadas = new List<int>();
 public static List<int> InvocadasRival = new List<int>();
+//Posicion Mano
+private int positionhand;
+private int positionhandrival;
+
 
     // Start is called before the first frame update
     void Start()
@@ -96,9 +100,13 @@ panel.transform.localScale = new Vector3(1f,1f,0);
 }
 public void Invocar()
 {
+ 
+
   Debug.Log(objectoInvocado.transform.position.x);
   Debug.Log(PositionMano());
+  positionhand = PositionMano();
   Debug.Log(PosicionRivalMano());
+  positionhandrival = PosicionRivalMano();
   if(Invocaste == false)
   {
     Invocaste = true;
@@ -126,7 +134,7 @@ Debug.Log(objectoInvocado.tag);
 
      if(posicionescampo[2,0] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Asedio1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y  , 2f);
@@ -159,7 +167,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[2,1] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Asedio1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -192,7 +200,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[2,2] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Asedio1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -234,7 +242,7 @@ Debug.Log(objectoInvocado.tag);
   {
     if(posicionescampo[1,0] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Distancia1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -263,7 +271,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[1,1] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Distancia1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -292,7 +300,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[1,2] == false)
          {
-             Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Distancia1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -330,7 +338,7 @@ Debug.Log(objectoInvocado.tag);
   {
          if(posicionescampo[0,0] == false)
          {
-             Invocadas.Add(PositionMano());
+             Invocadas.Add(positionhand);
              GameObject posx = GameObject.Find("Cuerpo1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -359,7 +367,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[0,1] == false)
          {
-          Invocadas.Add(PositionMano());
+          Invocadas.Add(positionhand);
            GameObject posx = GameObject.Find("Cuerpo1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -388,7 +396,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[0,2] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Cuerpo1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -426,7 +434,7 @@ Debug.Log(objectoInvocado.tag);
   {
     if(posicionescampo[2,0] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Asedio1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -439,7 +447,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[2,1] == false)
          {
-           Invocadas.Add(PositionMano());
+          Invocadas.Add(positionhand);
            GameObject posx = GameObject.Find("Asedio1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -452,7 +460,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[2,2] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Asedio1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -467,6 +475,7 @@ Debug.Log(objectoInvocado.tag);
 
         else  if(posicionescampo[1,0] == false)
          {
+          Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Distancia1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -480,6 +489,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[1,1] == false)
          {
+          Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Distancia1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -493,7 +503,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[1,2] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Distancia1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -506,7 +516,7 @@ Debug.Log(objectoInvocado.tag);
          }
         else  if(posicionescampo[0,0] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
              GameObject posx = GameObject.Find("Cuerpo1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -519,7 +529,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[0,1] == false)
          {
-           Invocadas.Add(PositionMano());
+           Invocadas.Add(positionhand);
            GameObject posx = GameObject.Find("Cuerpo1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -532,7 +542,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[0,2] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Cuerpo1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -555,7 +565,7 @@ Debug.Log(objectoInvocado.tag);
   {
       if(posicionescampo[2,0] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Asedio1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -568,7 +578,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[2,1] == false)
          {
-           Invocadas.Add(PositionMano());
+           Invocadas.Add(positionhand);
            GameObject posx = GameObject.Find("Asedio1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -581,7 +591,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[2,2] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Asedio1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -596,7 +606,7 @@ Debug.Log(objectoInvocado.tag);
 
         else  if(posicionescampo[1,0] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Distancia1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -609,7 +619,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[1,1] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Distancia1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -622,7 +632,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[1,2] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Distancia1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -635,7 +645,7 @@ Debug.Log(objectoInvocado.tag);
          }
         else  if(posicionescampo[0,0] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
              GameObject posx = GameObject.Find("Cuerpo1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -648,7 +658,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[0,1] == false)
          {
-          Invocadas.Add(PositionMano());
+          Invocadas.Add(positionhand);
            GameObject posx = GameObject.Find("Cuerpo1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -660,7 +670,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescampo[0,2] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Cuerpo1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -683,7 +693,7 @@ Debug.Log(objectoInvocado.tag);
   {
     if(posicionescamporival[2,0] == false)
          {
-           Invocadas.Add(PositionMano());
+           Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Asedio2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -696,7 +706,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescamporival[2,1] == false)
          {
-          Invocadas.Add(PositionMano());
+          Invocadas.Add(positionhand);
            GameObject posx = GameObject.Find("Asedio2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -709,7 +719,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescamporival[2,2] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Asedio2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -722,7 +732,7 @@ Debug.Log(objectoInvocado.tag);
          }
        else  if(posicionescamporival[1,0] == false)
          {
-           Invocadas.Add(PositionMano());
+           Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Distancia2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -735,7 +745,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescamporival[1,1] == false)
          {
-           Invocadas.Add(PositionMano());
+           Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Distancia2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -748,7 +758,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescamporival[1,2] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Distancia2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -761,7 +771,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescamporival[0,0] == false)
          {
-            Invocadas.Add(PositionMano());
+            Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Cuerpo2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -774,7 +784,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescamporival[0,1] == false)
          {
-          Invocadas.Add(PositionMano());
+          Invocadas.Add(positionhand);
            GameObject posx = GameObject.Find("Cuerpo2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -787,7 +797,7 @@ Debug.Log(objectoInvocado.tag);
          }
          else if(posicionescamporival[0,2] == false)
          {
-           Invocadas.Add(PositionMano());
+           Invocadas.Add(positionhand);
             GameObject posx = GameObject.Find("Cuerpo2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -807,7 +817,7 @@ Debug.Log(objectoInvocado.tag);
  #region Lider
 else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
 {
-  Invocadas.Add(PositionMano());
+  Invocadas.Add(positionhand);
    GameObject posx = GameObject.Find("CartaLider1");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -822,7 +832,7 @@ else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
  #region Aumento
   else if(objectoInvocado.tag == "AumentoR")
  {
-    Invocadas.Add(PositionMano());
+    Invocadas.Add(positionhand);
     GameObject posx = GameObject.Find("AumentoDistancia1");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -835,7 +845,7 @@ else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
  }
  else if(objectoInvocado.tag == "AumentoRA")
  {
-  Invocadas.Add(PositionMano());
+  Invocadas.Add(positionhand);
   GameObject posx = GameObject.Find("AumentoAsedio1");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -847,7 +857,7 @@ else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
  }
  else if(objectoInvocado.tag == "AumentoRC")
  {
-  Invocadas.Add(PositionMano());
+  Invocadas.Add(positionhand);
   GameObject posx = GameObject.Find("AumentoCuerpo1");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -863,7 +873,7 @@ else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
  {
    if(posicionescartasmagicas[0,1] == false)
    {
-    Invocadas.Add(PositionMano());
+    Invocadas.Add(positionhand);
      GameObject posx = GameObject.Find("Clima1");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -875,8 +885,8 @@ else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
    }
    else if(posicionescartasmagicas[1,1] == false)
    {
-    Invocadas.Add(PositionMano());
-       GameObject posx = GameObject.Find("Clima2");
+    Invocadas.Add(positionhand);
+    GameObject posx = GameObject.Find("Clima2");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
     posicionescartasmagicas[1,1] = true;
@@ -887,7 +897,7 @@ else if(objectoInvocado.tag == "Lider" && LeaderPos == false)
    }
    else if(posicionescartasmagicas[2,1] == false)
    {
-    Invocadas.Add(PositionMano());
+    Invocadas.Add(positionhand);
     GameObject posx = GameObject.Find("Clima3");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -912,7 +922,7 @@ if(objectoInvocado.tag == "Asedio1")
 
      if(posicionescamporival[2,0] == false)
          {
-            InvocadasRival.Add(PosicionRivalMano());
+            InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Asedio2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -941,7 +951,7 @@ if(objectoInvocado.tag == "Asedio1")
          }
          else if(posicionescamporival[2,1] == false)
          {
-           InvocadasRival.Add(PosicionRivalMano());
+          InvocadasRival.Add(positionhandrival);
            GameObject posx = GameObject.Find("Asedio2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -970,7 +980,7 @@ if(objectoInvocado.tag == "Asedio1")
          }
          else if(posicionescamporival[2,2] == false)
          {
-           InvocadasRival.Add(PosicionRivalMano());
+           InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Asedio2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1008,12 +1018,8 @@ else if(objectoInvocado.tag == "Distancia1")
   {
     if(posicionescamporival[1,0] == false)
          {
-          Debug.Log(objectoInvocado.transform.position.x);
-          Debug.Log(PosicionRivalMano());
-          InvocadasRival.Add(PosicionRivalMano());
           
-        
-          
+          InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Distancia2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1038,7 +1044,7 @@ else if(objectoInvocado.tag == "Distancia1")
          }
          else if(posicionescamporival[1,1] == false)
          {
-            InvocadasRival.Add(PosicionRivalMano());
+            InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Distancia2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1063,7 +1069,7 @@ else if(objectoInvocado.tag == "Distancia1")
          }
          else if(posicionescamporival[1,2] == false)
          {
-            InvocadasRival.Add(PosicionRivalMano());
+            InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Distancia2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1098,7 +1104,7 @@ else if(objectoInvocado.tag == "Distancia1")
   {
          if(posicionescamporival[0,0] == false)
          {
-            InvocadasRival.Add(PosicionRivalMano());
+            InvocadasRival.Add(positionhandrival);
              GameObject posx = GameObject.Find("Cuerpo2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1123,7 +1129,7 @@ else if(objectoInvocado.tag == "Distancia1")
          }
          else if(posicionescamporival[0,1] == false)
          {
-          InvocadasRival.Add(PosicionRivalMano());
+          InvocadasRival.Add(positionhandrival);
            GameObject posx = GameObject.Find("Cuerpo2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1148,7 +1154,7 @@ else if(objectoInvocado.tag == "Distancia1")
          }
          else if(posicionescamporival[0,2] == false)
          {
-          InvocadasRival.Add(PosicionRivalMano());
+          InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Cuerpo2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1182,7 +1188,7 @@ else if(objectoInvocado.tag == "Oro1")
 {
   if(posicionescamporival[2,0] == false)
          {
-          InvocadasRival.Add(PosicionRivalMano());
+          InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Asedio2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1192,7 +1198,7 @@ else if(objectoInvocado.tag == "Oro1")
          }
          else if(posicionescamporival[2,1] == false)
          {
-          InvocadasRival.Add(PosicionRivalMano());
+          InvocadasRival.Add(positionhandrival);
            GameObject posx = GameObject.Find("Asedio2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1201,7 +1207,7 @@ else if(objectoInvocado.tag == "Oro1")
          }
          else if(posicionescamporival[2,2] == false)
          {
-          InvocadasRival.Add(PosicionRivalMano());
+          InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Asedio2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1211,7 +1217,7 @@ else if(objectoInvocado.tag == "Oro1")
          }
        else  if(posicionescamporival[1,0] == false)
          {
-          InvocadasRival.Add(PosicionRivalMano());
+          InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Distancia2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1221,7 +1227,7 @@ else if(objectoInvocado.tag == "Oro1")
          }
          else if(posicionescamporival[1,1] == false)
          {
-          InvocadasRival.Add(PosicionRivalMano());
+          InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Distancia2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1231,7 +1237,7 @@ else if(objectoInvocado.tag == "Oro1")
          }
          else if(posicionescamporival[1,2] == false)
          {
-          InvocadasRival.Add(PosicionRivalMano());
+          InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Distancia2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1241,7 +1247,7 @@ else if(objectoInvocado.tag == "Oro1")
          }
          else if(posicionescamporival[0,0] == false)
          {
-           InvocadasRival.Add(PosicionRivalMano());
+           InvocadasRival.Add(positionhandrival);
              GameObject posx = GameObject.Find("Cuerpo2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1251,7 +1257,7 @@ else if(objectoInvocado.tag == "Oro1")
          }
          else if(posicionescamporival[0,1] == false)
          {
-          InvocadasRival.Add(PosicionRivalMano());
+          InvocadasRival.Add(positionhandrival);
            GameObject posx = GameObject.Find("Cuerpo2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1261,7 +1267,7 @@ else if(objectoInvocado.tag == "Oro1")
          }
          else if(posicionescamporival[0,2] == false)
          {
-           InvocadasRival.Add(PosicionRivalMano());
+           InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Cuerpo2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1281,7 +1287,7 @@ else if(objectoInvocado.tag == "Silver1")
 {
    if(posicionescamporival[2,0] == false)
          {
-          InvocadasRival.Add(PosicionRivalMano());
+          InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Asedio2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1291,7 +1297,7 @@ else if(objectoInvocado.tag == "Silver1")
          }
          else if(posicionescamporival[2,1] == false)
          {
-          InvocadasRival.Add(PosicionRivalMano());
+          InvocadasRival.Add(positionhandrival);
            GameObject posx = GameObject.Find("Asedio2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1301,7 +1307,7 @@ else if(objectoInvocado.tag == "Silver1")
          }
          else if(posicionescamporival[2,2] == false)
          {
-          InvocadasRival.Add(PosicionRivalMano());
+          InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Asedio2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1311,7 +1317,7 @@ else if(objectoInvocado.tag == "Silver1")
          }
        else  if(posicionescamporival[1,0] == false)
          {
-          InvocadasRival.Add(PosicionRivalMano());
+          InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Distancia2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1321,7 +1327,7 @@ else if(objectoInvocado.tag == "Silver1")
          }
          else if(posicionescamporival[1,1] == false)
          {
-           InvocadasRival.Add(PosicionRivalMano());
+           InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Distancia2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1331,7 +1337,7 @@ else if(objectoInvocado.tag == "Silver1")
          }
          else if(posicionescamporival[1,2] == false)
          {
-          InvocadasRival.Add(PosicionRivalMano());
+          InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Distancia2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1341,7 +1347,7 @@ else if(objectoInvocado.tag == "Silver1")
          }
          else if(posicionescamporival[0,0] == false)
          {
-           InvocadasRival.Add(PosicionRivalMano());
+           InvocadasRival.Add(positionhandrival);
              GameObject posx = GameObject.Find("Cuerpo2Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1351,7 +1357,7 @@ else if(objectoInvocado.tag == "Silver1")
          }
          else if(posicionescamporival[0,1] == false)
          {
-           InvocadasRival.Add(PosicionRivalMano());
+           InvocadasRival.Add(positionhandrival);
            GameObject posx = GameObject.Find("Cuerpo2Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1361,7 +1367,7 @@ else if(objectoInvocado.tag == "Silver1")
          }
          else if(posicionescamporival[0,2] == false)
          {
-           InvocadasRival.Add(PosicionRivalMano());
+           InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Cuerpo2Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1380,6 +1386,7 @@ else if(objectoInvocado.tag == "Senuelo1")
 {
       if(posicionescampo[2,0] == false)
          {
+         InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Asedio1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y  , 2f);
@@ -1388,6 +1395,7 @@ else if(objectoInvocado.tag == "Senuelo1")
          }
          else if(posicionescampo[2,1] == false)
          {
+          InvocadasRival.Add(positionhandrival);
            GameObject posx = GameObject.Find("Asedio1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1396,6 +1404,7 @@ else if(objectoInvocado.tag == "Senuelo1")
          }
          else if(posicionescampo[2,2] == false)
          {
+          InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Asedio1Espacio3");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1404,6 +1413,7 @@ else if(objectoInvocado.tag == "Senuelo1")
          }
          else if(posicionescampo[1,0] == false)
          {
+          InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Distancia1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1412,6 +1422,7 @@ else if(objectoInvocado.tag == "Senuelo1")
          }
          else if(posicionescampo[1,1] == false)
          {
+          InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Distancia1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1436,6 +1447,7 @@ else if(objectoInvocado.tag == "Senuelo1")
          }
          else if(posicionescampo[0,1] == false)
          {
+          InvocadasRival.Add(positionhandrival);
            GameObject posx = GameObject.Find("Cuerpo1Espacio1");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1444,6 +1456,7 @@ else if(objectoInvocado.tag == "Senuelo1")
          }
          else if(posicionescampo[0,2] == false)
          {
+          InvocadasRival.Add(positionhandrival);
             GameObject posx = GameObject.Find("Cuerpo1Espacio2");
             Vector3 posy = posx.transform.position;
             objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1459,7 +1472,7 @@ else if(objectoInvocado.tag == "Senuelo1")
 #region Lider Rival
 else if(objectoInvocado.tag == "Lider2" && LeaderRivalPos == false)
 {
-  InvocadasRival.Add(PosicionRivalMano());
+ InvocadasRival.Add(positionhandrival);
    GameObject posx = GameObject.Find("CartaLider2");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1470,7 +1483,7 @@ else if(objectoInvocado.tag == "Lider2" && LeaderRivalPos == false)
 #region Aumento Rival
 else if(objectoInvocado.tag == "AumentoR2")
  {
-   InvocadasRival.Add(PosicionRivalMano());
+   InvocadasRival.Add(positionhandrival);
     GameObject posx = GameObject.Find("AumentoDistancia2");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1479,7 +1492,7 @@ else if(objectoInvocado.tag == "AumentoR2")
  }
  else if(objectoInvocado.tag == "AumentoRC2")
  {
-  InvocadasRival.Add(PosicionRivalMano());
+  InvocadasRival.Add(positionhandrival);
   GameObject posx = GameObject.Find("AumentoCuerpo2");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1488,7 +1501,7 @@ else if(objectoInvocado.tag == "AumentoR2")
  }
  else if(objectoInvocado.tag == "AumentoRA2")
  {
-  InvocadasRival.Add(PosicionRivalMano());
+  InvocadasRival.Add(positionhandrival);
    GameObject posx = GameObject.Find("AumentoAsedio2");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1501,7 +1514,7 @@ else if(objectoInvocado.tag == "ClimaL")
  {
    if(posicionescartasmagicasrival[0,1] == false)
    {
-    InvocadasRival.Add(PosicionRivalMano());
+   InvocadasRival.Add(positionhandrival);
      GameObject posx = GameObject.Find("Clima4");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1510,7 +1523,7 @@ else if(objectoInvocado.tag == "ClimaL")
    }
    else if(posicionescartasmagicasrival[1,1] == false)
    {
-    InvocadasRival.Add(PosicionRivalMano());
+   InvocadasRival.Add(positionhandrival);
        GameObject posx = GameObject.Find("Clima5");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);
@@ -1519,7 +1532,7 @@ else if(objectoInvocado.tag == "ClimaL")
    }
    else if(posicionescartasmagicasrival[2,1] == false)
    {
-    InvocadasRival.Add(PosicionRivalMano());
+    InvocadasRival.Add(positionhandrival);
       GameObject posx = GameObject.Find("Clima6");
     Vector3 posy = posx.transform.position;
     objectoInvocado.transform.position = new Vector3(posy.x , posy.y , 2f);

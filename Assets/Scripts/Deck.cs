@@ -130,22 +130,31 @@ private int cantidadRivalRobar = 0;
         if(CardUnidad.Invocadas.Count >= 2)
       {
         cantidadRobar++;
-       int carta1 = CardUnidad.Invocadas[0];
-       int carta2 = CardUnidad.Invocadas[1];
-       hand.RemoveAt(carta1);
-       hand.RemoveAt(carta2);
+        GameObject [] handtemp = hand.ToArray();
+        for(int i = 0 ; i < CardUnidad.Invocadas.Count;i++)
+        {
+            handtemp[CardUnidad.Invocadas[i]] = null;
+        }
+      List<GameObject> handnew = new List<GameObject>();
+      foreach(var elemento in handtemp)
+      {
+        if(elemento != null)
+        {
+          handnew.Add(elemento);
+        }
+      }
         for(int i = 0 ; i < 2 ;i++)
     {
         GameObject temp = deck[Random.Range(0,deck.Count)];
-        hand.Add(temp);
+        handnew.Add(temp);
         deck.Remove(temp);
     }
     EliminarInstancias();
     Transform handposi = transform.Find("HandPosition");
     //Mostrar tablero
-    for(int i = 0 ; i < hand.Count ; i++)
+    for(int i = 0 ; i < handnew.Count ; i++)
     {
-        GameObject card = hand[i];
+        GameObject card = handnew[i];
         Transform pos = handposi.GetChild(i);
         GameObject nuevainstancia = Instantiate(card,pos.position,Quaternion.identity);
         Debug.Log(card);
@@ -173,22 +182,31 @@ private int cantidadRivalRobar = 0;
        if(CardUnidad.InvocadasRival.Count >= 2)
       {
         cantidadRivalRobar++;
-       int carta1 = CardUnidad.InvocadasRival[0];
-       int carta2 = CardUnidad.InvocadasRival[1];
-       hand.RemoveAt(carta1);
-       hand.RemoveAt(carta2);
+        GameObject [] handtemp = hand.ToArray();
+          for(int i = 0 ; i < CardUnidad.InvocadasRival.Count;i++)
+        {
+            handtemp[CardUnidad.InvocadasRival[i]] = null;
+        }
+        List<GameObject> handnew = new List<GameObject>();
+          foreach(var elemento in handtemp)
+      {
+        if(elemento != null)
+        {
+          handnew.Add(elemento);
+        }
+      }
         for(int i = 0 ; i < 2 ;i++)
     {
         GameObject temp = deck[Random.Range(0,deck.Count)];
-        hand.Add(temp);
+        handnew.Add(temp);
         deck.Remove(temp);
     }
     EliminarInstanciasRival();
     Transform handposi = transform.Find("HandPosition");
     //Mostrar tablero
-    for(int i = 0 ; i < hand.Count ; i++)
+    for(int i = 0 ; i < handnew.Count ; i++)
     {
-        GameObject card = hand[i];
+        GameObject card = handnew[i];
         Transform pos = handposi.GetChild(i);
         GameObject nuevainstancia = Instantiate(card,pos.position,Quaternion.identity);
         Debug.Log(card);
