@@ -100,7 +100,24 @@ panel.transform.localScale = new Vector3(1f,1f,0);
 }
 public void Invocar()
 {
- 
+  GameObject Charizard = GameObject.Find("Charizard");
+  if(Charizard != null)
+  {
+    AnimationsCharizard animationsCharizard = Charizard.GetComponent<AnimationsCharizard>();
+    if(animationsCharizard != null)
+    {
+      animationsCharizard.AtaqueDragon();
+
+    }
+    else
+    {
+      Debug.Log("Berro aqui");
+    }
+  }
+  else
+  {
+    Debug.Log("No encontro el objecto");
+  }
 
   Debug.Log(objectoInvocado.transform.position.x);
   Debug.Log(PositionMano());
@@ -1556,6 +1573,25 @@ else if(objectoInvocado.tag == "ClimaL")
 }
 public void Efecto()
 {
+  GameObject Charizard = GameObject.Find("Charizard");
+  if(Charizard != null)
+  {
+    AnimationsCharizard animationsCharizard = Charizard.GetComponent<AnimationsCharizard>();
+    if(animationsCharizard != null)
+    {
+      animationsCharizard.EfectoDragon();
+      
+
+    }
+    else
+    {
+      Debug.Log("Berro aqui");
+    }
+  }
+  else
+  {
+    Debug.Log("No encontro el objecto");
+  }
 //Mi campo
 #region  Aumentos Efecto Red
   if(objectoInvocado.GetComponent<CardUnidad>().Name == "Poder de Uno" && ActiveEfects[0,4] == false)
