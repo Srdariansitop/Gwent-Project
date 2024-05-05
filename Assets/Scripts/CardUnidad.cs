@@ -45,6 +45,8 @@ public Transform canvasTransform;
 public static List<GameObject> Cementary = new List<GameObject>();
 //Invocaste?
 public static bool Invocaste;
+//Activaste Efectos
+public static bool Activaste;
 //Posiciones Invocadas
 public static List<int> Invocadas = new List<int>();
 public static List<int> InvocadasRival = new List<int>();
@@ -1593,6 +1595,9 @@ public void Efecto()
     Debug.Log("No encontro el objecto");
   }
 //Mi campo
+if(Activaste == false)
+{
+ Activaste = true;
 #region  Aumentos Efecto Red
   if(objectoInvocado.GetComponent<CardUnidad>().Name == "Poder de Uno" && ActiveEfects[0,4] == false)
   {
@@ -2215,7 +2220,252 @@ else
   Debug.Log("No se encontro a la carta lider en el cementerio");
 }
 }
+else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Naganadel" && ActiveEfects[0,3] == false)
+{
+ ActiveEfects[0,3] = true;
+ GameObject canvass = GameObject.Find("Tablero");
+Transform cartaTransform45 = canvass.transform.Find("Distancia1Lugia(Clone)");
+Transform cartaTransform46 = canvass.transform.Find("Distancia1Lunala(Clone)");
+Transform cartaTransform47 = canvass.transform.Find("Distancia1Palkia(Clone)");
+Transform cartaTransform48 = canvass.transform.Find("Distancia1Dialga(Clone)");
+          if(cartaTransform45 != null)
+      {
+        GameObject cartaaeliminar = cartaTransform45.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform45.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        ContadorRival -= 600;
+        if(ActiveEfectsRival[1,1] == true)
+        {
+          ContadorRival += 100;
+        }
+        if(ActiveEfectsRival[0,4] == true)
+        {
+          ContadorRival -=100;
+        }
+        if(ActiveEfectsRival[1,0] == true)
+        {
+          ContadorRival -=600;
+        }
+        if(ActiveEfectsRival[0,0] == true)
+        {
+          ContadorRival += 700;
+        }
+        if(ActiveEfectsRival[2,0] == true)
+        {
+          ContadorRival += 200;
+        }
+      }
+        if(cartaTransform46 != null)
+      {
+        GameObject cartaaeliminar = cartaTransform46.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform46.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        ContadorRival -= 300;
+             if(ActiveEfectsRival[1,1] == true)
+        {
+          ContadorRival += 100;
+        }
+          if(ActiveEfectsRival[0,4] == true)
+        {
+          ContadorRival -=100;
+        }
+        if(ActiveEfectsRival[1,0] == true)
+        {
+          ContadorRival -=600;
+        }
+         if(ActiveEfectsRival[0,0] == true)
+        {
+          ContadorRival += 700;
+        }
+        if(ActiveEfectsRival[2,0] == true)
+        {
+          ContadorRival += 200;
+        }
+      }
+        if(cartaTransform47 != null)
+      {
+        GameObject cartaaeliminar = cartaTransform47.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform47.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        ContadorRival -=700;
+             if(ActiveEfectsRival[1,1] == true)
+        {
+          ContadorRival += 100;
+        }
+        if(ActiveEfectsRival[1,0] == true)
+        {
+          ContadorRival -=600;
+        }
+          if(ActiveEfectsRival[0,4] == true)
+        {
+          ContadorRival -=100;
+        }
+         if(ActiveEfectsRival[0,0] == true)
+        {
+          ContadorRival += 700;
+        }
+        if(ActiveEfectsRival[2,0] == true)
+        {
+          ContadorRival += 200;
+        }
+      }
+        if(cartaTransform48 != null)
+      {
+        GameObject cartaaeliminar = cartaTransform48.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform48.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        ContadorRival -= 700;
+             if(ActiveEfectsRival[1,1] == true)
+        {
+          ContadorRival += 100;
+        }
+          if(ActiveEfectsRival[0,4] == true)
+        {
+          ContadorRival -=100;
+        }
+        if(ActiveEfectsRival[1,0] == true)
+        {
+          ContadorRival -=600;
+        }
+         if(ActiveEfectsRival[0,0] == true)
+        {
+          ContadorRival += 700;
+        }
+        if(ActiveEfectsRival[2,0] == true)
+        {
+          ContadorRival += 200;
+        }
+      }
 
+
+}
+else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Blastoise" && ActiveEfects[1,3] == false)
+{
+  ActiveEfects[1,3] = true;
+  GameObject canvass = GameObject.Find("Tablero");
+   Transform cartaTransform41 = canvass.transform.Find("XerneasCuerpoL(Clone)");
+   Transform cartaTransform42 = canvass.transform.Find("GroudonCuerpo 1(Clone)");
+   Transform cartaTransform43 = canvass.transform.Find("ZacianCuerpo1(Clone)");
+   Transform cartaTransform44 = canvass.transform.Find("SolgaleoCuerpo4(Clone)");
+           if(cartaTransform41 != null)
+      {
+        GameObject cartaaeliminar = cartaTransform41.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform41.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        ContadorRival -=400;
+         if(ActiveEfectsRival[1,1] == true)
+        {
+          ContadorRival += 100;
+        }
+        if(ActiveEfectsRival[2,4] == true)
+        {
+           ContadorRival -= 1000;
+        }
+         if(ActiveEfectsRival[1,0] == true)
+        {
+          ContadorRival +=400;
+        }
+        if(ActiveEfectsRival[2,0] == true)
+        {
+          ContadorRival += 200;
+        }
+          if(ActiveEfectsRival[0,0] == true)
+        {
+          ContadorRival -= 500;
+        }
+      }
+        if(cartaTransform42 != null)
+      {
+        GameObject cartaaeliminar = cartaTransform42.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform42.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        ContadorRival -= 500;
+         if(ActiveEfectsRival[1,1] == true)
+        {
+          ContadorRival += 100;
+        }
+          if(ActiveEfectsRival[2,4] == true)
+        {
+           ContadorRival -= 1000;
+        }
+          if(ActiveEfectsRival[1,0] == true)
+        {
+          ContadorRival +=400;
+        }
+        if(ActiveEfectsRival[2,0] == true)
+        {
+          ContadorRival += 200;
+        }
+           if(ActiveEfectsRival[0,0] == true)
+        {
+          ContadorRival -= 500;
+        }
+      }
+        if(cartaTransform43 != null)
+      {
+        GameObject cartaaeliminar = cartaTransform43.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform43.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        ContadorRival -= 300;
+         if(ActiveEfectsRival[1,1] == true)
+        {
+          ContadorRival += 100;
+        }
+          if(ActiveEfectsRival[2,4] == true)
+        {
+           ContadorRival -= 1000;
+        }
+          if(ActiveEfectsRival[1,0] == true)
+        {
+          ContadorRival +=400;
+        }
+        if(ActiveEfectsRival[2,0] == true)
+        {
+          ContadorRival += 200;
+        }
+           if(ActiveEfectsRival[0,0] == true)
+        {
+          ContadorRival -= 500;
+        }
+      }
+        if(cartaTransform44 != null)
+      {
+        GameObject cartaaeliminar = cartaTransform44.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform44.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        ContadorRival -=400;
+         if(ActiveEfectsRival[1,1] == true)
+        {
+          ContadorRival += 100;
+        }
+          if(ActiveEfectsRival[2,4] == true)
+        {
+           ContadorRival -= 1000;
+        }
+          if(ActiveEfectsRival[1,0] == true)
+        {
+          ContadorRival +=400;
+        }
+        if(ActiveEfectsRival[2,0] == true)
+        {
+          ContadorRival += 200;
+        }
+           if(ActiveEfectsRival[0,0] == true)
+        {
+          ContadorRival -= 500;
+        }
+      }
+
+
+}
 #region Silver 
 else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Lucario" && ActiveEfects[1,2] == false)
 {
@@ -5954,6 +6204,127 @@ else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Darkrai" && ActiveEf
    int result = Cementary.Count;
    ContadorRival += (100 * result);
 }
+else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Kyogre" && ActiveEfectsRival[0,3] == false)
+{
+  ActiveEfectsRival[0,3] = true;
+  GameObject canvass = GameObject.Find("Tablero");
+  Transform cartaTransform1 = canvass.transform.Find("Asedio1R(Clone)");
+  Transform cartaTransform2 = canvass.transform.Find("Asedio2R(Clone)");
+  Transform cartaTransform3 = canvass.transform.Find("Asedio3R(Clone)");
+  Transform cartaTransform4 = canvass.transform.Find("Asedio4R(Clone)");
+    if(cartaTransform1 != null)
+      {
+        GameObject cartaaeliminar = cartaTransform1.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform1.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        Contador -=500;
+        if(ActiveEfects[2,4] == true)
+        {
+           Contador -= 300;
+        }
+        if(ActiveEfects[1,1] == true)
+        {
+          Contador += 100;
+        }
+        if(ActiveEfects[0,0] == true)
+        {
+          Contador -=400;
+        }
+            if(ActiveEfects[1,0] == true)
+        {
+          Contador += 500;
+        }
+        if(ActiveEfects[2,0] == true)
+        {
+          Contador += 1000;
+        }
+      }
+        if(cartaTransform2 != null)
+      {
+        GameObject cartaaeliminar = cartaTransform2.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform2.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        Contador -=600;
+            if(ActiveEfects[2,4] == true)
+        {
+           Contador -= 300;
+        }
+         if(ActiveEfects[1,1] == true)
+        {
+          Contador += 100;
+        }
+         if(ActiveEfects[0,0] == true)
+        {
+          Contador -=400;
+        }
+          if(ActiveEfects[1,0] == true)
+        {
+          Contador += 500;
+        }
+        if(ActiveEfects[2,0] == true)
+        {
+          Contador += 1000;
+        }
+      }
+        if(cartaTransform3 != null)
+      {
+        GameObject cartaaeliminar = cartaTransform3.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform3.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        Contador -=300;
+            if(ActiveEfects[2,4] == true)
+        {
+           Contador -= 300;
+        }
+         if(ActiveEfects[1,1] == true)
+        {
+          Contador += 100;
+        }
+         if(ActiveEfects[0,0] == true)
+        {
+          Contador -=400;
+        }
+          if(ActiveEfects[1,0] == true)
+        {
+          Contador += 500;
+        }
+        if(ActiveEfects[2,0] == true)
+        {
+          Contador += 1000;
+        }
+      }
+        if(cartaTransform4 != null)
+      {
+        GameObject cartaaeliminar = cartaTransform4.gameObject;
+        Cementary.Add(cartaaeliminar);
+        cartaTransform4.position = new Vector3(200f,200f,200f);
+        cartaaeliminar.transform.SetParent(null);
+        Contador -= 400;
+            if(ActiveEfects[2,4] == true)
+        {
+           Contador -= 300;
+        }
+         if(ActiveEfects[1,1] == true)
+        {
+          Contador += 100;
+        }
+         if(ActiveEfects[0,0] == true)
+        {
+          Contador -=400;
+        }
+          if(ActiveEfects[1,0] == true)
+        {
+          Contador += 500;
+        }
+        if(ActiveEfects[2,0] == true)
+        {
+          Contador += 1000;
+        }
+      }
+}
 #endregion
 #region  Silver Rival
 else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Rayquaza" && ActiveEfectsRival[2,1] == false)
@@ -6018,6 +6389,12 @@ else if(objectoInvocado.GetComponent<CardUnidad>().Name == "Arceus" && LeaderRiv
  LeaderRivalEfect = true;
 }
 #endregion
+
+}
+else 
+{
+  Debug.Log("No se puede activar en un efecto en este turno");
+}
 }
 
 

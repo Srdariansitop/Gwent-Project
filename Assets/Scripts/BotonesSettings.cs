@@ -44,11 +44,10 @@ public void Activar()
     if (Condition == false)
     {
         Turnos++;
-        Contador.transform.rotation = Quaternion.Euler(180,180,0);
-        ContadoresRival.transform.rotation =  Quaternion.Euler(0,0,0);
         mainCameraa.transform.rotation = Quaternion.Euler(180,180,0);
         Condition = true;
         CardUnidad.Invocaste = false;
+        CardUnidad.Activaste = false;
         buttonBarajear.transform.localScale = Vector3.zero;
         buttonBarajearRival.transform.localScale = new Vector3(1f,1f,1f);
         if(CardUnidad.ActiveEfects[0,2] == true)
@@ -69,11 +68,10 @@ public void Activar()
     {
         
         Turnos++;
-       ContadoresRival.transform.rotation = Quaternion.Euler(180,180,0);
-        Contador.transform.rotation =  Quaternion.Euler(0,0,0);
         mainCameraa.transform.rotation = Quaternion.Euler(0,0,0);
         Condition = false;
         CardUnidad.Invocaste = false;
+         CardUnidad.Activaste = false;
         buttonBarajear.transform.localScale = new Vector3(1f,1f,1f);
          buttonBarajearRival.transform.localScale = Vector3.zero;
            if(CardUnidad.ActiveEfects[0,2] == true)
@@ -102,7 +100,7 @@ public void Regresar()
 }
 public void GanadorRonda()
 {
-  if(Turnos % 2 == 0 && Turnos > 5)
+  if(Turnos % 2 == 0 && Turnos > 2)
   {
     
     int contador = CardUnidad.Contador;
@@ -124,6 +122,7 @@ public void GanadorRonda()
         Condition = false;
         CardUnidad.VaciarCampo();
         CardUnidad.Invocaste = false;
+         CardUnidad.Activaste = false;
         buttonBarajear.transform.localScale = Vector3.zero;
         buttonBarajearRival.transform.localScale = Vector3.zero;
         if(Rondas == RondasRival)
@@ -150,6 +149,7 @@ public void GanadorRonda()
        Condition = true;
        CardUnidad.VaciarCampo();
        CardUnidad.Invocaste = false;
+        CardUnidad.Activaste = false;
         buttonBarajear.transform.localScale = Vector3.zero;
         buttonBarajearRival.transform.localScale = Vector3.zero;
         if(Rondas == RondasRival)
@@ -177,6 +177,7 @@ public void GanadorRonda()
        Condition = true;
        CardUnidad.VaciarCampo();
        CardUnidad.Invocaste = false;
+        CardUnidad.Activaste = false;
         buttonBarajear.transform.localScale = Vector3.zero;
         buttonBarajearRival.transform.localScale = Vector3.zero;
         if(Rondas == RondasRival)
